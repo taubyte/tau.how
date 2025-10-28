@@ -1,0 +1,32 @@
+/* Extra CSS for Taubyte Documentation */
+
+/* Custom styling for code blocks */
+.highlight .hll {
+  background-color: var(--md-code-hl-color--light);
+}
+
+/* Custom styling for admonitions */
+.md-typeset .admonition.note {
+  border-color: var(--md-primary-fg-color);
+}
+
+/* Custom styling for navigation */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/* Custom styling for tables */
+.md-typeset table:not([class]) {
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Custom styling for buttons */
+.md-button {
+  border-radius: 4px;
+}
+
+/* Logo adjustments */
+.md-header__button.md-logo img {
+  height: 32px;
+  width: auto;
+}

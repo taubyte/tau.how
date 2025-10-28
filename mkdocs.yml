@@ -1,75 +1,221 @@
-site_name: My Documentation
-site_description: A documentation site built with MkDocs Material
-site_url: https://example.com
-repo_url: https://github.com/taubyte/tau
+site_name: Taubyte Documentation
+site_description: Taubyte - Open-source Serverless Operating System
+site_author: Taubyte Team
+site_url: https://docs.taubyte.com
+
+# Repository
 repo_name: taubyte/tau
+repo_url: https://github.com/taubyte/tau
 edit_uri: edit/main/docs/
 
+# Configuration
 theme:
   name: material
-  logo: assets/images/logo.png
-  favicon: assets/images/favicon.ico
+
+  # Static files
+  logo: assets/logo.svg
+
+  # Features
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.footnote.tooltips
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+
+  # Palette - Dark theme as default
   palette:
-    # Palette toggle for dark mode (default)
+    # Default dark theme
     - scheme: slate
-      primary: black
-      accent: blue
+      primary: blue grey
+      accent: blue grey
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-    # Palette toggle for light mode
+
+    # Light theme option
     - scheme: default
-      primary: black
-      accent: blue
+      primary: blue grey
+      accent: blue grey
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.expand
-    - navigation.top
-    - search.highlight
-    - search.share
-    - content.code.copy
-    - content.code.annotate
-    - content.action.edit
-    - content.action.view
 
+  # Font
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+  - git-committers:
+      repository: taubyte/tau
+      branch: main
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+  - macros
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/taubyte
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/KbN3KN7kpQ
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/taubyte_io
+
+  version:
+    provider: mike
+    default: latest
+
+  generator: false
+
+  status:
+    new: Recently added
+    deprecated: Deprecated
+
+# Extensions
 markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      title: On this page
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic:
+      mode: view
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      use_pygments: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-  - admonition
-  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: taubyte
+      repo: tau
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
-  - attr_list
-  - md_in_html
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
-plugins:
-  - search
-  - glightbox
-  - git-revision-date-localized:
-      type: date
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/taubyte/tau
-      name: GitHub Repository
-    - icon: fontawesome/solid/star
-      link: https://github.com/taubyte/tau/stargazers
-      name: GitHub Stars
-
+# Page tree
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
-  - API Reference: api.md
+
+  - Getting Started:
+      - getting-started/index.md
+      - Introduction: getting-started/introduction.md
+      - Installation: getting-started/installation.md
+      - Local Cloud: getting-started/local-cloud.md
+      - First Function: getting-started/first-function.md
+
+  - Fundamentals:
+      - fundamentals/index.md
+      - Architecture: fundamentals/architecture.md
+      - Services: fundamentals/services.md
+      - Concepts: fundamentals/concepts.md
+
+  - Development:
+      - development/index.md
+      - Projects: development/projects.md
+      - Functions: development/functions.md
+      - Websites: development/websites.md
+      - Databases: development/databases.md
+      - Storage: development/storage.md
+      - Messaging: development/messaging.md
+      - Libraries: development/libraries.md
+
+  - Platform:
+      - platform/index.md
+      - Deployment: platform/deployment.md
+      - Spore Drive: platform/spore-drive.md
+      - CI/CD: platform/ci-cd.md
+      - Branches: platform/branches.md
+      - Production: platform/production.md
+
+  - Reference:
+      - reference/ai-guide.md
+      - reference/applications.md
+
+  - Tools:
+      - tools/dream.md
+      - tools/tau-cli.md
+      - tools/web-console.md
+
+  - "✨ Features Demo": demo-features.md
+
+# Extra CSS
+extra_css:
+  - stylesheets/extra.css
+
+# Extra JavaScript
+extra_javascript:
+  - javascripts/extra.js
