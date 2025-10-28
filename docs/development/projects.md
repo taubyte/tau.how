@@ -16,8 +16,8 @@ Navigate to [console.taubyte.com](https://console.taubyte.com) and configure you
 - Select network: `Dreamland/blackhole` (for local development)
 - Click `Login with GitHub`
 
-![](/images/webconsole-dreamland-login-select-network.png)
-![](/images/webconsole-dreamland-login-github.png)
+![](../images/webconsole-dreamland-login-select-network.png)
+![](../images/webconsole-dreamland-login-github.png)
 
 > 💡 **Note**: GitHub access is browser-local and creates project repositories that are cloned into a browser-based virtual filesystem.
 
@@ -25,14 +25,14 @@ Navigate to [console.taubyte.com](https://console.taubyte.com) and configure you
 
 1. From the projects dashboard, click `Create project`
 
-![](/images/webconsole-dreamland-new-project-btn.png)
+![](../images/webconsole-dreamland-new-project-btn.png)
 
 2. Configure your project settings:
    - **Name**: Choose a descriptive project name
    - **Description**: Provide a brief project description
    - **Visibility**: Select private or public for repository visibility
 
-![](/images/webconsole-dreamland-new-project-modal.png)
+![](../images/webconsole-dreamland-new-project-modal.png)
 
 #### 3. Project Structure Created
 
@@ -43,7 +43,7 @@ The Web Console automatically creates two repositories for your project:
 
 Upon successful creation, you'll be redirected to the project dashboard:
 
-![](/images/webconsole-dreamland-new-project-dashboard.png)
+![](../images/webconsole-dreamland-new-project-dashboard.png)
 
 ### Using tau-cli
 

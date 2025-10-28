@@ -4,7 +4,7 @@ Taubyte's distributed architecture consists of several core services that work t
 
 ## Auth Service
 
-![](/images/auth-service-overview-dia.png)
+![](../images/auth-service-overview-dia.png)
 
 The Auth service is the cornerstone of security, managing authentication, authorization, and secrets across the platform. It integrates with Git providers to map repository access to projects and securely stores credentials for other services.
 
@@ -20,7 +20,7 @@ Auth is a replicated service, utilizing CRDT (Conflict-free Replicated Data Type
 
 ## Seer Service
 
-![](/images/seer-service-overview-dia.png)
+![](../images/seer-service-overview-dia.png)
 
 Seer functions as the network's directory, maintaining a comprehensive record of all nodes. It stores data on services, usage, and metadata, sharing this information internally with services like `gateway` and externally via DNS.
 
@@ -36,7 +36,7 @@ Seer nodes communicate through pub-sub and use CRDT to maintain consistency acro
 
 ## TNS (Taubyte Name Service)
 
-![](/images/tns-service-overview-dia.png)
+![](../images/tns-service-overview-dia.png)
 
 TNS is a powerful distributed registry that keeps track of all projects hosted on the platform. It is designed to map GitHub branches and commits, ensuring version consistency across the board.
 
@@ -52,7 +52,7 @@ TNS leverages CRDT for seamless replication, providing high reliability and cons
 
 ## Gateway Service
 
-![](/images/gateway-service-overview-dia.png)
+![](../images/gateway-service-overview-dia.png)
 
 The Gateway service acts as the platform's load balancer. It identifies nodes running the `substrate` service and maintains multiplexed connections with healthy nodes.
 
@@ -68,7 +68,7 @@ Requests are routed based on a scoring system that evaluates factors like cache 
 
 ## Patrick Service
 
-![](/images/patrick-service-overview-dia.png)
+![](../images/patrick-service-overview-dia.png)
 
 Patrick orchestrates CI/CD jobs, listening for events from Git providers over HTTPS. It validates requests, creates build jobs with appropriate attributes, and manages job lifecycles.
 
@@ -84,7 +84,7 @@ Patrick uses CRDT for replication, ensuring high availability of CI/CD orchestra
 
 ## Monkey Service
 
-![](/images/monkey-service-overview-dia.png)
+![](../images/monkey-service-overview-dia.png)
 
 Monkey is a worker service that competes for CI/CD jobs. It implements a race-to-lock system for job execution to prevent conflicts.
 
@@ -101,7 +101,7 @@ Once a job is locked by a Monkey instance, it executes the build, sends status a
 
 ## Hoarder Service
 
-![](/images/hoarder-service-overview-dia.png)
+![](../images/hoarder-service-overview-dia.png)
 
 Hoarder manages the replication of assets, storage, and databases across the network. It implements a distributed storage strategy based on content rarity and availability.
 
@@ -117,7 +117,7 @@ Instances of Hoarder communicate asset and resource IDs, assigning rarity scores
 
 ## Substrate Service
 
-![](/images/substrate-service-overview-dia.png)
+![](../images/substrate-service-overview-dia.png)
 
 Substrate is the powerhouse of event processing in Taubyte. It actively listens for events from various sources and executes the corresponding functions or serves content.
 

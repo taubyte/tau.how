@@ -8,7 +8,7 @@ Taubyte provides built-in static website hosting with automatic HTTPS, global di
 
 1. Navigate to `Websites` in the side menu and click the `+` button
 
-![](/images/webconsole-dreamland-create-new-website.png)
+![](../images/webconsole-dreamland-create-new-website.png)
 
 2. Configure your website:
    - **Name**: Enter a descriptive website name
@@ -17,11 +17,11 @@ Taubyte provides built-in static website hosting with automatic HTTPS, global di
    - **Domain**: Select the generated domain
    - **Path**: Add `/` as the root path (or specific paths like `/docs`)
 
-![](/images/webconsole-dreamland-create-new-website-modal.png)
+![](../images/webconsole-dreamland-create-new-website-modal.png)
 
 3. Select a template (e.g., HTML template) and click `Generate`
 
-![](/images/webconsole-dreamland-create-new-website-template.png)
+![](../images/webconsole-dreamland-create-new-website-template.png)
 
 > 💡 **Note**: This creates a new repository on GitHub and pushes the generated code to it.
 
@@ -73,15 +73,15 @@ After creating a website, you can edit content directly in the GitHub repository
 
 1. Click on the open icon next to your website to access the repository
 
-![](/images/webconsole-dreamland-create-new-website-template-open-repo.png)
+![](../images/webconsole-dreamland-create-new-website-template-open-repo.png)
 
 2. Edit files like `index.html` directly in GitHub
 
-![](/images/webconsole-dreamland-create-new-website-open-index-edit-btn.png)
+![](../images/webconsole-dreamland-create-new-website-open-index-edit-btn.png)
 
 3. Make your changes and commit them
 
-![](/images/webconsole-dreamland-create-new-website-open-index-edit-commit.png)
+![](../images/webconsole-dreamland-create-new-website-open-index-edit-commit.png)
 
 ### Local Development
 
@@ -151,7 +151,7 @@ async function loadData() {
 
 1. **Push Configuration**: First, push website configuration changes through the Web Console
 
-![](/images/webconsole-dreamland-create-new-website-push-config-changes.png)
+![](../images/webconsole-dreamland-create-new-website-push-config-changes.png)
 
 2. **Trigger Build**: For local development with dream, manually trigger the build:
 
@@ -164,7 +164,7 @@ dream inject push-specific \
 
 3. **Monitor Build**: Check the builds page for completion status
 
-![](/images/webconsole-dreamland-create-new-website-build-done.png)
+![](../images/webconsole-dreamland-create-new-website-build-done.png)
 
 ### Production Deployment
 
@@ -192,7 +192,7 @@ sudo vi /etc/hosts
 
 3. Access your website directly or through the Web Console
 
-![](/images/webconsole-dreamland-create-new-website-build-open.png)
+![](../images/webconsole-dreamland-create-new-website-build-open.png)
 
 ### Production
 

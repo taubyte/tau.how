@@ -13,7 +13,8 @@ theme:
   name: material
 
   # Static files
-  logo: assets/logo.svg
+  logo: assets/logo-w.svg
+  favicon: assets/logo-w.svg
 
   # Features
   features:

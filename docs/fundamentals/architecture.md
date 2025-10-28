@@ -2,7 +2,7 @@
 
 At its core, Taubyte is a distributed peer-to-peer network of nodes providing services that make up the platform. Each node has its own unique identity and can provide one or many services.
 
-![](/images/taubyte-based-cloud-iso-p2p-image.png)
+![](../images/taubyte-based-cloud-iso-p2p-image.png)
 
 ## Core Architecture Components
 

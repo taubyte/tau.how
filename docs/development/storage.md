@@ -30,7 +30,7 @@ Taubyte provides distributed object storage for files, images, documents, and an
 
 1. Navigate to `Storage` in the side menu and click the `+` button
 
-![](/images/webconsole-dreamland-create-new-storage.png)
+![](../images/webconsole-dreamland-create-new-storage.png)
 
 2. Configure your storage:
    - **Name**: `simple_storage` (descriptive name)
@@ -38,11 +38,11 @@ Taubyte provides distributed object storage for files, images, documents, and an
    - **Type**: `Object Bucket` (storage type)
    - **Size**: `1GB` (storage limit)
 
-![](/images/webconsole-dreamland-create-new-storage-modal.png)
+![](../images/webconsole-dreamland-create-new-storage-modal.png)
 
 3. Push the configuration changes
 
-![](/images/webconsole-dreamland-create-new-storage-push-modal-2.png)
+![](../images/webconsole-dreamland-create-new-storage-push-modal-2.png)
 
 ### Storage Configuration
 

@@ -23,21 +23,21 @@ Import your existing project into the production cloud.
 
 If you're currently connected to dream (development), log out first:
 
-![](/images/webconsole-logout-of-dream.png)
+![](../images/webconsole-logout-of-dream.png)
 
 Navigate to [console.taubyte.com](https://console.taubyte.com) and select "Custom":
 
-![](/images/webconsole-login-select-custom.png)
+![](../images/webconsole-login-select-custom.png)
 
 Enter your production cloud's FQDN and login:
 
-![](/images/webconsole-login-select-custom-enter-fqdn.png)
+![](../images/webconsole-login-select-custom-enter-fqdn.png)
 
 #### Step 2: Import Your Project
 
 Click "Import Project":
 
-![](/images/webconsole-import-project.png)
+![](../images/webconsole-import-project.png)
 
 Select the repositories to import. The Web Console will:
 
@@ -45,11 +45,11 @@ Select the repositories to import. The Web Console will:
 - Match code repositories with config repositories
 - Allow manual entry if repositories aren't detected
 
-![](/images/webconsole-import-project-modal.png)
+![](../images/webconsole-import-project-modal.png)
 
 Your project appears in the project list. Click to load it:
 
-![](/images/webconsole-import-project-done.png)
+![](../images/webconsole-import-project-done.png)
 
 #### Step 3: Trigger Production Builds
 

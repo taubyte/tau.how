@@ -22,7 +22,7 @@ Spore Drive provides:
 
 Spore Drive is an RPC service that runs on your local machine. Unless used from a browser, your SDK will start it automatically.
 
-![](/images/spore-drive-overview-dia.png)
+![](../images/spore-drive-overview-dia.png)
 
 ### Architecture Components
 

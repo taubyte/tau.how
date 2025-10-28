@@ -31,18 +31,18 @@ Taubyte provides a built-in publish-subscribe messaging system for real-time com
 
 1. Navigate to `Messaging` in the side menu and click the `+` button
 
-![](/images/webconsole-dreamland-create-new-messaging.png)
+![](../images/webconsole-dreamland-create-new-messaging.png)
 
 2. Configure your messaging channel:
    - **Name**: `ws_chan` (descriptive name)
    - **Topic Matcher**: `/ws/chan` (pattern for channel access)
    - **WebSocket**: Toggle enabled for WebSocket support
 
-![](/images/webconsole-dreamland-create-new-messaging-modal.png)
+![](../images/webconsole-dreamland-create-new-messaging-modal.png)
 
 3. Push the configuration changes
 
-![](/images/webconsole-dreamland-create-new-messaging-push-done.png)
+![](../images/webconsole-dreamland-create-new-messaging-push-done.png)
 
 ### Messaging Configuration
 

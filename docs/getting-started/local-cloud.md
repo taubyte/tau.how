@@ -53,7 +53,7 @@ Example output:
 2. Click the Dreamland button (requires active dreamland instance)
 3. Navigate: Sidebar → Network → blackhole
 
-![](/images/webconsole-dreamland-universe.png)
+![](../images/webconsole-dreamland-universe.png)
 
 The network visualization shows:
 
@@ -61,7 +61,7 @@ The network visualization shows:
 - Interactive node graph
 - Port information on hover
 
-![](/images/webconsole-dreamland-hover-node.png)
+![](../images/webconsole-dreamland-hover-node.png)
 
 > 💡 **Pro tip**: The graph is interactive - drag nodes to rearrange the visualization
 

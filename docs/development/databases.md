@@ -30,7 +30,7 @@ Taubyte provides a distributed key-value database system that automatically repl
 
 1. Navigate to `Database` in the side menu and click the `+` button
 
-![](/images/webconsole-dreamland-create-new-database.png)
+![](../images/webconsole-dreamland-create-new-database.png)
 
 2. Configure your database:
    - **Name**: `example_kv_store` (descriptive name)
@@ -38,11 +38,11 @@ Taubyte provides a distributed key-value database system that automatically repl
    - **Replication**: `min=1, max=2` (replication settings)
    - **Size**: `100MB` (storage limit)
 
-![](/images/webconsole-dreamland-create-new-database-modal.png)
+![](../images/webconsole-dreamland-create-new-database-modal.png)
 
 3. Push the configuration changes
 
-![](/images/webconsole-dreamland-create-new-database-push-2.png)
+![](../images/webconsole-dreamland-create-new-database-push-2.png)
 
 ### Database Configuration
 

@@ -36,17 +36,17 @@ Applications are organizational containers within a Taubyte project that group r
 1. Navigate to `Applications` in the side menu
 2. Click the `+` button to create a new application
 
-![](/images/webconsole-new-app.png)
+![](../images/webconsole-new-app.png)
 
 3. Configure application properties:
    - **Name**: Application identifier (e.g., `backend`, `frontend`, `api`)
    - **Description**: Purpose and functionality description
 
-![](/images/webconsole-new-app-modal.png)
+![](../images/webconsole-new-app-modal.png)
 
 4. Push configuration changes to apply
 
-![](/images/webconsole-new-app-push-done.png)
+![](../images/webconsole-new-app-push-done.png)
 
 ### Application Structure
 
@@ -76,11 +76,11 @@ project/
 1. Navigate to the `Applications` section
 2. Click on the application name to enter its scope
 
-![](/images/webconsole-new-app-open.png)
+![](../images/webconsole-new-app-open.png)
 
 3. The interface switches to application-specific views
 
-![](/images/webconsole-new-app-opened.png)
+![](../images/webconsole-new-app-opened.png)
 
 ### Creating Resources within Applications
 
@@ -94,7 +94,7 @@ Once inside an application, create resources as you would globally:
    - Paths don't need to include application name
    - Access to both application and global resources
 
-![](/images/webconsole-new-app-new-func-modal.png)
+![](../images/webconsole-new-app-new-func-modal.png)
 
 #### Example Function Configuration
 
@@ -113,7 +113,7 @@ timeout: 10s
 
 Application functions are organized separately:
 
-![](/images/webconsole-new-app-new-func-push-1.png)
+![](../images/webconsole-new-app-new-func-push-1.png)
 
 **Configuration Path:** `applications/backend/functions/api-handler.yaml`
 

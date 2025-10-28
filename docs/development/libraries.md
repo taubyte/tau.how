@@ -31,24 +31,24 @@ Libraries in Taubyte allow you to move serverless function code outside of the m
 
 1. Navigate to the `Libraries` tab in the left sidebar and click `+`
 
-![](/images/webconsole-new-library.png)
+![](../images/webconsole-new-library.png)
 
 2. Configure your library:
    - **Name**: Choose a descriptive name for your library
    - **Repository**: Select `Generate` to create a new repository
    - **Template**: Choose from available templates (currently one template available)
 
-![](/images/webconsole-new-library-modal.png)
+![](../images/webconsole-new-library-modal.png)
 
 > 💡 **Note**: If you want to import an existing library, click on `--Generate--` and select the library you want to import.
 
 3. Click `Generate` to create the repository and populate it with template code
 
-![](/images/webconsole-new-library-modal-template-select.png)
+![](../images/webconsole-new-library-modal-template-select.png)
 
 4. Push the configuration changes and note the repository details
 
-![](/images/webconsole-new-library-listed-push-1.png)
+![](../images/webconsole-new-library-listed-push-1.png)
 
 **Important**: Save the GitHub repository ID and fullname for later use:
 
@@ -83,7 +83,7 @@ Use the entire library as the source for a function.
 2. Click `Select a source` and choose your library
 3. Set the entry point to match your library's exported function
 
-![](/images/webconsole-new-library-new-func-modal-sel-lib.png)
+![](../images/webconsole-new-library-new-func-modal-sel-lib.png)
 
 #### Example Library Code
 

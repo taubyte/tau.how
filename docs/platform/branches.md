@@ -65,15 +65,15 @@ Using the Web Console:
 2. Click on the current branch name (usually "main")
 3. Click the `+` button to create a new branch
 
-![](/images/webconsole-create-new-branch.png)
+![](../images/webconsole-create-new-branch.png)
 
 4. Enter branch name (e.g., "develop") and validate
 
-![](/images/webconsole-create-new-branch-modal.png)
+![](../images/webconsole-create-new-branch-modal.png)
 
 5. Console refreshes and shows the new branch is active
 
-![](/images/webconsole-create-branch-set-to-dev.png)
+![](../images/webconsole-create-branch-set-to-dev.png)
 
 ### 2. Start Dream on New Branch
 
