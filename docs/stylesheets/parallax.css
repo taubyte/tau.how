@@ -49,25 +49,39 @@
 }
 
 .demo-page .md-content__inner article {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.demo-page .md-typeset {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Remove all gutters and margins */
 .demo-page .md-grid {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   max-width: 100%;
 }
 
 .demo-page body {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .demo-page .md-container > .md-main {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.demo-page .md-content__inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.demo-page article.md-content__inner {
+  padding: 0 !important;
 }
 
 /* Sidebar and Navigation */
@@ -128,7 +142,7 @@
 }
 
 .hero-section .parallax-background {
-  background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop&q=80');
+  background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop&q=80");
 }
 
 .hero-title {
@@ -170,7 +184,7 @@
 }
 
 .features-section .parallax-background {
-  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');
+  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80");
 }
 
 .features-grid {
@@ -217,7 +231,7 @@
   width: 100%;
   max-width: 800px;
   height: 400px;
-  background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&q=80');
+  background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&q=80");
   background-size: cover;
   background-position: center;
   border-radius: 8px;
@@ -230,7 +244,7 @@
 }
 
 .cta-section .parallax-background {
-  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');
+  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80");
 }
 
 .cta-title {
@@ -269,19 +283,19 @@
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .features-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-title {
     font-size: 2rem;
   }
-  
+
   .parallax-content {
     padding: 1rem;
   }
@@ -292,4 +306,3 @@
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
-
