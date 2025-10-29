@@ -1,10 +1,9 @@
-/* Parallax Demo Page Styles */
-.demo-page {
+/* Parallax Demo Page Styles - ONLY APPLIES TO DEMO PAGE */
+body.demo-page {
   overflow-x: hidden;
 }
 
-/* Transparent Navigation - Absolute positioning so content goes underneath */
-.demo-page .md-header {
+body.demo-page .md-header {
   position: absolute !important;
   top: 0;
   left: 0;
@@ -15,25 +14,25 @@
   z-index: 1000;
 }
 
-.demo-page .md-header.scrolled {
+body.demo-page .md-header.scrolled {
   position: fixed !important;
   background: var(--md-default-bg-color) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.demo-page .md-header__inner {
+body.demo-page .md-header__inner {
   background: transparent;
 }
 
-.demo-page .md-nav__title {
+body.demo-page .md-nav__title {
   background: transparent;
 }
 
-.demo-page .md-main {
+body.demo-page .md-main {
   margin-top: 0 !important;
 }
 
-.demo-page .md-tabs {
+body.demo-page .md-tabs {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,82 +40,72 @@
   z-index: 999;
 }
 
-/* Full-width Layout */
-.demo-page .md-container {
-  margin: 0;
-  padding: 0;
+/* Full-width Layout - ONLY FOR DEMO PAGE */
+body.demo-page .md-container {
+  margin: 0 !important;
+  padding: 0 !important;
   max-width: 100%;
 }
 
-.demo-page .md-main__inner {
-  margin: 0;
+body.demo-page .md-main__inner {
+  margin: 0 !important;
   max-width: 100%;
-  padding: 0;
+  padding: 0 !important;
 }
 
-.demo-page .md-content {
+body.demo-page .md-content {
   max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.demo-page .md-content__inner {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.demo-page .md-content__inner article {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.demo-page .md-typeset {
+body.demo-page .md-content__inner {
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.demo-page .md-content__inner article {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.demo-page .md-typeset {
   margin: 0 !important;
   padding: 0 !important;
 }
 
 /* Remove all gutters and margins */
-.demo-page .md-grid {
+body.demo-page .md-grid {
   margin: 0 !important;
   padding: 0 !important;
   max-width: 100%;
 }
 
-.demo-page body {
+body.demo-page .md-container > .md-main {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.demo-page .md-container > .md-main {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.demo-page .md-content__inner {
+body.demo-page .md-content__inner {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.demo-page article.md-content__inner {
+body.demo-page article.md-content__inner {
   padding: 0 !important;
 }
 
-/* Sidebar and Navigation */
-.demo-page .md-sidebar,
-.demo-page .md-sidebar--primary,
-.demo-page .md-sidebar--secondary {
+/* Sidebar and Navigation - HIDE ON DEMO PAGE ONLY */
+body.demo-page .md-sidebar,
+body.demo-page .md-sidebar--primary,
+body.demo-page .md-sidebar--secondary {
   display: none;
 }
 
-/* Footer */
-.demo-page .md-footer {
+/* Footer - HIDE ON DEMO PAGE ONLY */
+body.demo-page .md-footer {
   display: none;
-}
-
-/* Header spacing */
-.demo-page .md-header {
-  z-index: 100;
 }
 
 /* Parallax Sections */
