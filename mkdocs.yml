@@ -80,7 +80,7 @@ plugins:
       enable_creation_date: true
       type: timeago
   - git-committers:
-      repository: taubyte/tau
+      repository: taubyte/tau.how
       branch: main
   - glightbox:
       touchNavigation: true
