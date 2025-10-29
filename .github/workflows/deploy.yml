@@ -50,8 +50,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Download artifact
+        uses: actions/download-pages-artifact@v4
+        
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/deploy-pages@v4
