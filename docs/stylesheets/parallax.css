@@ -24,9 +24,16 @@
 }
 
 /* Full-width Layout */
+.demo-page .md-container {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
 .demo-page .md-main__inner {
   margin: 0;
   max-width: 100%;
+  padding: 0;
 }
 
 .demo-page .md-content {
@@ -41,6 +48,28 @@
   padding: 0;
 }
 
+.demo-page .md-content__inner article {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove all gutters and margins */
+.demo-page .md-grid {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.demo-page body {
+  margin: 0;
+  padding: 0;
+}
+
+.demo-page .md-container > .md-main {
+  margin: 0;
+  padding: 0;
+}
+
 /* Sidebar and Navigation */
 .demo-page .md-sidebar,
 .demo-page .md-sidebar--primary,
@@ -51,6 +80,11 @@
 /* Footer */
 .demo-page .md-footer {
   display: none;
+}
+
+/* Header spacing */
+.demo-page .md-header {
+  z-index: 100;
 }
 
 /* Parallax Sections */
@@ -93,6 +127,10 @@
   background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
 }
 
+.hero-section .parallax-background {
+  background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop&q=80');
+}
+
 .hero-title {
   font-size: 4rem;
   font-weight: 700;
@@ -129,6 +167,10 @@
 /* Features Section */
 .features-section {
   background: linear-gradient(135deg, #2d2d44 0%, #1e1e2e 100%);
+}
+
+.features-section .parallax-background {
+  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');
 }
 
 .features-grid {
@@ -171,10 +213,13 @@
   background: var(--md-default-bg-color);
 }
 
-.architecture-image {
-  max-width: 800px;
+.architecture-placeholder {
   width: 100%;
-  height: auto;
+  max-width: 800px;
+  height: 400px;
+  background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
@@ -182,6 +227,10 @@
 /* CTA Section */
 .cta-section {
   background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+}
+
+.cta-section .parallax-background {
+  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');
 }
 
 .cta-title {

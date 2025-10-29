@@ -1,45 +1,42 @@
-{% extends "main.html" %}
-
-{% block extrahead %}
-  {{ super() }}
-  <style>
-    html, body { overflow-x: hidden; }
-  </style>
-{% endblock %}
-
-{% block site_meta %}
-  {{ super() }}
-  <script>
-    // Add demo-page class immediately
-    document.addEventListener('DOMContentLoaded', function() {
-      document.documentElement.classList.add('demo-page');
-      document.body.classList.add('demo-page');
-    });
-    // Also try before DOM ready
-    document.documentElement.classList.add('demo-page');
-    if (document.body) {
-      document.body.classList.add('demo-page');
-    }
-  </script>
-{% endblock %}
-
-{% block content %}
+{% extends "main.html" %} {% block extrahead %} {{ super() }}
+<style>
+  html,
+  body {
+    overflow-x: hidden;
+  }
+</style>
+{% endblock %} {% block site_meta %} {{ super() }}
+<script>
+  // Add demo-page class immediately
+  document.addEventListener("DOMContentLoaded", function () {
+    document.documentElement.classList.add("demo-page");
+    document.body.classList.add("demo-page");
+  });
+  // Also try before DOM ready
+  document.documentElement.classList.add("demo-page");
+  if (document.body) {
+    document.body.classList.add("demo-page");
+  }
+</script>
+{% endblock %} {% block content %}
 
 <!-- Hero Section -->
 <section class="parallax-section hero-section">
-  <div class="parallax-background rellax" data-rellax-speed="-2" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop&q=80');"></div>
+  <div class="parallax-background rellax" data-rellax-speed="-7"></div>
   <div class="parallax-content">
     <div class="rellax" data-rellax-speed="0">
       <h1 class="hero-title">Welcome to Taubyte</h1>
       <p class="hero-subtitle">Git-Native Serverless Operating System</p>
-      <a href="getting-started/" class="hero-cta rellax" data-rellax-speed="3">Get Started</a>
+      <a href="getting-started/" class="hero-cta rellax" data-rellax-speed="3"
+        >Get Started</a
+      >
     </div>
   </div>
 </section>
 
 <!-- Features Section -->
 <section class="parallax-section features-section">
-  <div class="parallax-background rellax" data-rellax-speed="-1" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');"></div>
+  <div class="parallax-background rellax" data-rellax-speed="-7"></div>
   <div class="parallax-content">
     <div class="rellax" data-rellax-speed="0">
       <h2>Built for Developers</h2>
@@ -47,17 +44,24 @@
         <div class="feature-card rellax" data-rellax-speed="2">
           <div class="feature-icon">🚀</div>
           <h3 class="feature-title">Git-Native</h3>
-          <p class="feature-description">Infrastructure as code through Git repositories with branch-based environments</p>
+          <p class="feature-description">
+            Infrastructure as code through Git repositories with branch-based
+            environments
+          </p>
         </div>
         <div class="feature-card rellax" data-rellax-speed="0">
           <div class="feature-icon">⚡</div>
           <h3 class="feature-title">Production Parity</h3>
-          <p class="feature-description">Local development environment mirrors production exactly</p>
+          <p class="feature-description">
+            Local development environment mirrors production exactly
+          </p>
         </div>
         <div class="feature-card rellax" data-rellax-speed="2">
           <div class="feature-icon">🌐</div>
           <h3 class="feature-title">P2P Architecture</h3>
-          <p class="feature-description">Distributed, resilient network design with automatic discovery</p>
+          <p class="feature-description">
+            Distributed, resilient network design with automatic discovery
+          </p>
         </div>
       </div>
     </div>
@@ -69,10 +73,20 @@
   <div class="parallax-content">
     <div class="rellax" data-rellax-speed="1">
       <h2 class="cta-title">Built from the Ground Up</h2>
-      <p class="cta-subtitle">No Kubernetes dependency - completely custom architecture</p>
-      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&q=80" alt="Architecture" class="architecture-image rellax" data-rellax-speed="-1">
-      <div style="margin-top: 2rem;">
-        <a href="fundamentals/architecture/" class="hero-cta" style="color: var(--md-default-bg-color); border-color: var(--md-default-bg-color);">Learn More</a>
+      <p class="cta-subtitle">
+        No Kubernetes dependency - completely custom architecture
+      </p>
+      <div class="architecture-placeholder rellax" data-rellax-speed="-3"></div>
+      <div style="margin-top: 2rem">
+        <a
+          href="fundamentals/architecture/"
+          class="hero-cta"
+          style="
+            color: var(--md-default-bg-color);
+            border-color: var(--md-default-bg-color);
+          "
+          >Learn More</a
+        >
       </div>
     </div>
   </div>
@@ -80,18 +94,24 @@
 
 <!-- CTA Section -->
 <section class="parallax-section cta-section">
-  <div class="parallax-background rellax" data-rellax-speed="-2" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=80');"></div>
+  <div class="parallax-background rellax" data-rellax-speed="-7"></div>
   <div class="parallax-content">
     <div class="rellax" data-rellax-speed="0">
       <h2 class="cta-title">Start Building Today</h2>
       <p class="cta-subtitle">Deploy your first function in minutes</p>
-      <a href="getting-started/introduction/" class="cta-button">View Documentation</a>
-      <div style="margin-top: 1rem;">
-        <a href="getting-started/first-function/" class="hero-cta" style="background: rgba(255, 255, 255, 0.1);">Create Your First Function</a>
+      <a href="getting-started/introduction/" class="cta-button"
+        >View Documentation</a
+      >
+      <div style="margin-top: 1rem">
+        <a
+          href="getting-started/first-function/"
+          class="hero-cta"
+          style="background: rgba(255, 255, 255, 0.1)"
+          >Create Your First Function</a
+        >
       </div>
     </div>
   </div>
 </section>
 
 {% endblock %}
-
