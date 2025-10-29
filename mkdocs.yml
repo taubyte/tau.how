@@ -11,6 +11,7 @@ edit_uri: edit/main/docs/
 # Configuration
 theme:
   name: material
+  custom_dir: docs/overrides
 
   # Static files
   logo: assets/logo-w.svg
@@ -185,6 +186,7 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
+  - Demo: demo.md
 
   - Getting Started:
       - getting-started/index.md
@@ -226,7 +228,10 @@ nav:
 # Extra CSS
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/parallax.css
 
 # Extra JavaScript
 extra_javascript:
+  - https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js
   - javascripts/extra.js
+  - javascripts/parallax.js

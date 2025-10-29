@@ -7,16 +7,19 @@ This is the documentation site for Taubyte, built with MkDocs Material.
 ### Setup
 
 1. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 2. Serve locally:
+
 ```bash
 mkdocs serve
 ```
 
 3. Build the site:
+
 ```bash
 mkdocs build
 ```
@@ -49,4 +52,3 @@ mkdocs gh-deploy
 
 - Site: https://taubyte.github.io/tau.how/
 - Repository: https://github.com/taubyte/tau.how
-
