@@ -17,7 +17,7 @@ You should see:
 [SUCCESS] Universe blackhole started!
 ```
 
-> 💡 **Tip**: You can verify everything is running with `dream status universe`
+> **Tip**: You can verify everything is running with `dream status universe`
 
 Once you see `SUCCESS`, it means your cloud has been fully started.
 
@@ -63,7 +63,7 @@ The network visualization shows:
 
 ![](../images/webconsole-dreamland-hover-node.png)
 
-> 💡 **Pro tip**: The graph is interactive - drag nodes to rearrange the visualization
+> **Tip**: The graph is interactive - drag nodes to rearrange the visualization
 
 ## Network Architecture
 
@@ -93,7 +93,7 @@ The other nodes, referred to as Simples (admittedly, not the best name), include
 - `elder` nodes are used for bootstrapping. Since `dream` interconnects all nodes, an `elder` is included for testing purposes when using [dream as a library](https://github.com/taubyte/tau/tree/main/dream)
 - `client` nodes are lightweight and can be used to test services or peer-to-peer services deployed on the cloud
 
-> 💡 **Dev Note**: In production, nodes can run multiple services by defining a "shape". The single-service-per-node setup in dream is purely for development convenience.
+> **Note**: In production, nodes can run multiple services by defining a "shape". The single-service-per-node setup in dream is purely for development convenience.
 
 ## Next Steps
 

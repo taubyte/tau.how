@@ -17,7 +17,7 @@ First, we need to create a project to host our function.
 ![](../images/webconsole-dreamland-login-select-network.png)
 ![](../images/webconsole-dreamland-login-github.png)
 
-> 💡 **Note**: The GitHub access is browser-local and is used to create project repositories that will be cloned into a browser-based virtual filesystem.
+> **Note**: The GitHub access is browser-local and is used to create project repositories that will be cloned into a browser-based virtual filesystem.
 
 ### Create Your Project
 

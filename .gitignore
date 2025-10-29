@@ -1,6 +1,9 @@
 # MkDocs build output
 site/
 
+# Old documentation
+docs-old/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -22,3 +25,5 @@ venv.bak/
 # OS
 .DS_Store
 Thumbs.db
+
+docs-old

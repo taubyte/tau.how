@@ -40,7 +40,7 @@ Libraries in Taubyte allow you to move serverless function code outside of the m
 
 ![](../images/webconsole-new-library-modal.png)
 
-> 💡 **Note**: If you want to import an existing library, click on `--Generate--` and select the library you want to import.
+> **Note**: If you want to import an existing library, click on `--Generate--` and select the library you want to import.
 
 3. Click `Generate` to create the repository and populate it with template code
 
@@ -229,7 +229,7 @@ The import path `libraries/<library_name>` is resolved:
 1. Within the context of the application (if function is in an application)
 2. Globally within the project
 
-> 💡 **Note**: In the example, the function is global, so the library is resolved globally.
+> **Note**: In the example, the function is global, so the library is resolved globally.
 
 ## Advanced Library Patterns
 

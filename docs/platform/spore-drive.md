@@ -127,7 +127,7 @@ await config.init();
 // await config.init();
 ```
 
-> 💡 **Best Practice**: Store configuration in a Git repository for version control and team collaboration.
+> **Best Practice**: Store configuration in a Git repository for version control and team collaboration.
 
 ### Cloud Configuration
 

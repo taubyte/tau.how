@@ -23,7 +23,7 @@ Your main cloud domain (e.g., `enterprise.starships.ws`)
 
 A sub-domain for auto-generated resources (e.g., `g.enterprise.starships.ws` or `e.ftll.ink`)
 
-> 💡 **Note**: The domain can be local, but it must resolve on all hosts where `tau` is installed.
+> **Note**: The domain can be local, but it must resolve on all hosts where `tau` is installed.
 
 ## Infrastructure Requirements
 
@@ -113,7 +113,7 @@ Generate a shared key for P2P communication:
 tau tools p2p swarm key generate --output /etc/tau/swarm.key
 ```
 
-> 💡 **Important**: The swarm key must be identical on all nodes in your cloud.
+> **Important**: The swarm key must be identical on all nodes in your cloud.
 
 ## Node Configuration
 

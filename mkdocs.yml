@@ -51,16 +51,16 @@ theme:
   palette:
     # Default dark theme
     - scheme: slate
-      primary: blue grey
-      accent: blue grey
+      primary: grey
+      accent: grey
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
 
     # Light theme option
     - scheme: default
-      primary: blue grey
-      accent: blue grey
+      primary: grey
+      accent: grey
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -114,6 +114,19 @@ extra:
   status:
     new: Recently added
     deprecated: Deprecated
+
+  # SEO and metadata
+  keywords:
+    - cloud computing
+    - serverless
+    - WebAssembly
+    - Git-native
+    - peer-to-peer
+    - infrastructure
+    - deployment
+    - distributed systems
+    - P2P
+    - WASM
 
 # Extensions
 markdown_extensions:
@@ -189,6 +202,7 @@ nav:
   - Development:
       - development/index.md
       - Projects: development/projects.md
+      - Applications: development/applications.md
       - Functions: development/functions.md
       - Websites: development/websites.md
       - Databases: development/databases.md
@@ -204,16 +218,10 @@ nav:
       - Branches: platform/branches.md
       - Production: platform/production.md
 
-  - Reference:
-      - reference/ai-guide.md
-      - reference/applications.md
-
   - Tools:
       - tools/dream.md
       - tools/tau-cli.md
       - tools/web-console.md
-
-  - "✨ Features Demo": demo-features.md
 
 # Extra CSS
 extra_css:

@@ -23,7 +23,7 @@ Taubyte provides built-in static website hosting with automatic HTTPS, global di
 
 ![](../images/webconsole-dreamland-create-new-website-template.png)
 
-> 💡 **Note**: This creates a new repository on GitHub and pushes the generated code to it.
+> **Note**: This creates a new repository on GitHub and pushes the generated code to it.
 
 ### Website Configuration
 

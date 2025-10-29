@@ -19,7 +19,7 @@ Navigate to [console.taubyte.com](https://console.taubyte.com) and configure you
 ![](../images/webconsole-dreamland-login-select-network.png)
 ![](../images/webconsole-dreamland-login-github.png)
 
-> 💡 **Note**: GitHub access is browser-local and creates project repositories that are cloned into a browser-based virtual filesystem.
+> **Note**: GitHub access is browser-local and creates project repositories that are cloned into a browser-based virtual filesystem.
 
 #### 2. Create Your Project
 
