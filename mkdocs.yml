@@ -3,7 +3,7 @@ site_description: Taubyte - Open-source Serverless Operating System
 site_author: Taubyte Team
 site_url: https://docs.taubyte.com
 
-# Repository
+# Repository - shows in navbar with stars/forks
 repo_name: taubyte/tau
 repo_url: https://github.com/taubyte/tau
 edit_uri: edit/main/docs/
@@ -97,7 +97,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/taubyte
+      link: https://github.com/taubyte/tau
     - icon: fontawesome/brands/discord
       link: https://discord.gg/KbN3KN7kpQ
     - icon: fontawesome/brands/twitter
