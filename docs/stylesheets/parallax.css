@@ -3,14 +3,20 @@
   overflow-x: hidden;
 }
 
-/* Transparent Navigation */
+/* Transparent Navigation - Absolute positioning so content goes underneath */
 .demo-page .md-header {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
   background: transparent !important;
   transition: all 0.3s ease;
   box-shadow: none;
+  z-index: 1000;
 }
 
 .demo-page .md-header.scrolled {
+  position: fixed !important;
   background: var(--md-default-bg-color) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
@@ -21,6 +27,18 @@
 
 .demo-page .md-nav__title {
   background: transparent;
+}
+
+.demo-page .md-main {
+  margin-top: 0 !important;
+}
+
+.demo-page .md-tabs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
 }
 
 /* Full-width Layout */
