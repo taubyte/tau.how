@@ -1,10 +1,25 @@
 {% extends "main.html" %}
 
+{% block extrahead %}
+  {{ super() }}
+  <style>
+    html, body { overflow-x: hidden; }
+  </style>
+{% endblock %}
+
 {% block site_meta %}
   {{ super() }}
   <script>
+    // Add demo-page class immediately
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.classList.add('demo-page');
+      document.body.classList.add('demo-page');
+    });
+    // Also try before DOM ready
     document.documentElement.classList.add('demo-page');
-    document.body.classList.add('demo-page');
+    if (document.body) {
+      document.body.classList.add('demo-page');
+    }
   </script>
 {% endblock %}
 

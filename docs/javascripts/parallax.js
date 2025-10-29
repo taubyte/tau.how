@@ -12,18 +12,23 @@
 
   // Initialize Rellax
   function initRellax() {
+    console.log('Attempting to initialize Rellax...');
+    console.log('Rellax available:', typeof Rellax);
+    
     if (typeof Rellax !== 'undefined') {
       rellaxInstance = new Rellax('.rellax', {
-        speed: -2,
+        speed: -7,
         center: false,
         wrapper: null,
         round: true,
         vertical: true,
         horizontal: false
       });
-      console.log('Rellax initialized');
+      console.log('Rellax initialized successfully!');
+      console.log('Found elements:', document.querySelectorAll('.rellax').length);
     } else {
-      console.error('Rellax library not loaded');
+      console.error('Rellax library not loaded - waiting...');
+      setTimeout(initRellax, 500);
     }
   }
 
