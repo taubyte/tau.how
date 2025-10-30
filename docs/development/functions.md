@@ -2,46 +2,28 @@
 
 <!-- Source: docs-old/01-dev-getting-started/03-first-function.md -->
 
-Serverless functions in Taubyte are WebAssembly-based, event-driven compute units that automatically scale and execute in response to various triggers like HTTP requests, WebSocket connections, or Pub/Sub messages.
 
-## Function Characteristics
+Let's create a WebAssembly serverless function in our cloud! We'll use the Web Console to create a simple ping-pong function in Go.
 
-### WebAssembly Runtime
+### Creating the Function
 
-- **Security**: Sandboxed execution environment
-- **Performance**: Near-native execution speed
-- **Portability**: Runs identically across different architectures
-- **Efficiency**: Compact binaries for fast distribution
+Navigate to `Functions` in the side menu and click the `+` button
+![](../images/webconsole-dreamland-new-function-dash.png)
 
-### Event Architecture
+Instead of filling out fields manually, let's use a template. Click `Template Select`
+![](../images/webconsole-dreamland-new-function-modal.png)
 
-- **Event-driven**: Functions respond to specific events
-- **Stateless**: No state maintained between invocations
-- **Auto-scaling**: Automatic scaling based on demand
-- **Fast startup**: Optimized for minimal cold start times
+In the template modal: Select Go as the language, choose the `ping_pong` template, and click 'Close' to exit the modal
+![](../images/webconsole-dreamland-new-function-template.png)
 
-### Supported Languages
+The template fills most fields automatically. For domains, click the dropdown and select `GeneratedDomain` to create a new domain resource
+![](../images/webconsole-dreamland-new-function-generated-domain.png)
 
-- **Go**: Primary language with full SDK support
-- **Other languages**: Any language that compiles to WebAssembly
+### The Configuration
 
-## Creating Functions
-
-### Using Templates
-
-The Web Console provides templates for quick function creation:
-
-1. Navigate to `Functions` and click the `+` button
-2. Click `Template Select` to choose from available templates
-3. Select language (e.g., Go) and template (e.g., `ping_pong`)
-4. Configure domains, paths, and execution parameters
-
-### Function Configuration
-
-Functions are configured via YAML with the following key sections:
-
+The Web Console clones your repos in-browser, so everything has a code representation. Click the `Yaml` tab to see the function's config:
 ```yaml
-id: ""
+id: ''
 description: Returns pong to a ping over HTTP
 tags: []
 source: .
@@ -58,332 +40,155 @@ execution:
   call: ping
 ```
 
-#### Configuration Options
+**Notes:**
+- `source: .` points to inline code, but you can also reference Git repos using `source: github.com/username/repo`
+- The `trigger` section supports multiple paths and HTTP methods - useful for RESTful APIs
+- Pro tip: Memory and timeout values can use any standard unit (KB, MB, GB, ms, s, m)
+- The `call` field must match your exported WebAssembly function name
 
-**Source:**
+### The Code
 
-- `source: .` - Inline code in the Web Console
-- `source: github.com/username/repo` - External Git repository
+Next, let's inspect the code. The Web Console features a modest code editor useful for quick inline code updates. Access it by clicking on the `Code` tab.
 
-**Trigger Types:**
+![](../images/webconsole-dreamland-new-function-go-to-code.png)
 
-- `https` - HTTP/HTTPS requests
-- `websocket` - WebSocket connections
-- `pubsub` - Pub/Sub messages
-- `timer` - Scheduled execution
+In the editor, you will observe (1) the usual Go files including go.mod, (2) the code for our handler function `ping`, and (3) a `.taubyte` folder defining how the function is built.
 
-**HTTP Configuration:**
+![](../images/webconsole-dreamland-new-function-code.png)
 
-- `method` - HTTP methods (GET, POST, PUT, DELETE, etc.)
-- `paths` - URL paths that trigger the function
-- `domains` - Domains where the function is available
 
-**Execution Settings:**
+- Package Naming
+    - The `main` package name is reserved for the build container
+    - Use a descriptive package name for your function
 
-- `timeout` - Maximum execution time (e.g., 10s, 1m)
-- `memory` - Memory allocation (e.g., 10MB, 100MB, 1GB)
-- `call` - Entry point function name (must match exported function)
+- SDK Implementation (`github.com/taubyte/go-sdk`)
+    - Provides the interface between your code and the VM
+    - Includes optimized wrappers for common operations
+    - Implements zero-copy operations for maximum performance
 
-## Writing Function Code
+- TinyGo Compilation Requirements
+    - Functions must be exported using `//export functionName` syntax
+    - Compatible with most Go standard library functionality
+    - Produces optimized WebAssembly binaries
 
-### Basic Structure
+- Event Architecture
+    - Events use minimal memory with uint32 identifiers
+    - Designed for efficient serverless execution
+    - Optimized for high-throughput scenarios
 
-All Taubyte functions must follow this pattern:
+Click `Done` to proceed.
 
-```go
-package lib
+![](../images/webconsole-dreamland-new-function-done.png)
 
-import (
-    "github.com/taubyte/go-sdk/event"
-    http "github.com/taubyte/go-sdk/http/event"
-)
 
-//export functionName
-func functionName(e event.Event) uint32 {
-    h, err := e.HTTP()
-    if err != nil {
-        return 1  // Error
-    }
+![](../images/webconsole-dreamland-new-function-listed.png)
 
-    // Your logic here
-    h.Write([]byte("Hello, World!"))
-    h.Return(200)
+Everything done so far is confined to a virtual filesystem in your browser. To apply these changes, we need to push them. Find the green button at the bottom right of the screen and click on it.
 
-    return 0  // Success
-}
-```
+![](../images/webconsole-dreamland-new-function-push.png)
 
-#### Critical Requirements
+A modal will guide you through the code changes, starting with configuration changes. Click on the domains folder, then open the GeneratedDomain.yaml file.
 
-1. **Export Comment**: `//export functionName` is mandatory
-2. **Function Signature**: `func functionName(e event.Event) uint32`
-3. **Return Values**: `0` for success, `1` for error
-4. **Package Name**: Use `lib` (not `main`)
+![](../images/webconsole-dreamland-new-function-push-001.png)
 
-### HTTP Request Handling
-
-#### Getting Request Data
-
-```go
-// Get HTTP method
-method, err := h.Method()
-if err != nil {
-    return 1
-}
-
-// Get query parameters
-param, err := h.Query().Get("paramName")
-if err != nil {
-    // Handle missing parameter
-}
-
-// Get path parameters
-id, err := h.Path().Get("id")
-if err != nil {
-    return 1
-}
-
-// Get headers
-contentType := h.Headers().Get("Content-Type")
-
-// Read request body
-body, err := io.ReadAll(h.Body())
-if err != nil {
-    return 1
-}
-```
-
-#### Sending Responses
-
-```go
-// Set response headers
-h.Headers().Set("Content-Type", "application/json")
-
-// Write response body
-response := map[string]string{"message": "success"}
-jsonResponse, _ := json.Marshal(response)
-h.Write(jsonResponse)
-
-// Set status code
-h.Return(200)
-```
-
-### Error Handling
-
-Always handle errors gracefully:
-
-```go
-func handleError(h http.Event, err error, code int) uint32 {
-    h.Write([]byte(err.Error()))
-    h.Return(code)
-    return 1
-}
-
-//export myFunction
-func myFunction(e event.Event) uint32 {
-    h, err := e.HTTP()
-    if err != nil {
-        return 1
-    }
-
-    // Use error handler
-    data, err := someOperation()
-    if err != nil {
-        return handleError(h, err, 500)
-    }
-
-    // Continue with success path
-    return 0
-}
-```
-
-## Function Types and Examples
-
-### HTTP API Function
-
-```go
-//export apiHandler
-func apiHandler(e event.Event) uint32 {
-    h, err := e.HTTP()
-    if err != nil {
-        return 1
-    }
-
-    method, _ := h.Method()
-
-    switch method {
-    case "GET":
-        return handleGet(h)
-    case "POST":
-        return handlePost(h)
-    case "PUT":
-        return handlePut(h)
-    case "DELETE":
-        return handleDelete(h)
-    default:
-        h.Write([]byte("Method not allowed"))
-        h.Return(405)
-        return 1
-    }
-}
-```
-
-### WebSocket Function
-
-```go
-//export websocketHandler
-func websocketHandler(e event.Event) uint32 {
-    ws, err := e.WebSocket()
-    if err != nil {
-        return 1
-    }
-
-    // Handle WebSocket messages
-    data, err := ws.Read()
-    if err != nil {
-        return 1
-    }
-
-    // Echo back the message
-    err = ws.Write(data)
-    if err != nil {
-        return 1
-    }
-
-    return 0
-}
-```
-
-### Pub/Sub Function
-
-```go
-//export pubsubHandler
-func pubsubHandler(e event.Event) uint32 {
-    channel, err := e.PubSub()
-    if err != nil {
-        return 1
-    }
-
-    data, err := channel.Data()
-    if err != nil {
-        return 1
-    }
-
-    // Process the received message
-    processMessage(data)
-
-    return 0
-}
-```
-
-## Library Integration
-
-Functions can use external libraries in two ways:
-
-### 1. Library as Source
-
-Set the function source to a library repository:
-
+Copy the FQDN generated for you as we will need it later:
 ```yaml
-source: github.com/username/library-repo
+fqdn: gftxhd6h0.blackhole.localtau
 ```
 
-### 2. Library as Dependency
+Click on Next to review code changes.
 
-Import library functions using WebAssembly imports:
+![](../images/webconsole-dreamland-new-function-push-002.png)
 
-```go
-//go:wasmimport libraries/my_library add
-func add(a, b uint32) uint64
+One more click on Next takes you to the final step, where you'll (1) enter a commit message and (2) push the changes to GitHub.
 
-//export calculateSum
-func calculateSum(e event.Event) uint32 {
-    // Use the imported library function
-    result := add(5, 3)
-    // Handle result...
-    return 0
-}
+![](../images/webconsole-dreamland-new-function-push-003.png)
+
+In production, this push would trigger an event that your cloud would capture. However, because we're using `dream` and GitHub cannot reach your nodes directly, we run a fixture called `push-all` to emulate the git events. Switch back to your terminal and run:
+
+```sh
+dream inject push-all
 ```
 
-## Deployment and Testing
+Return to the Web Console and, on the side menu, click on `Builds`. You should see two CI/CD jobs, one for configuration and one for code.
 
-### Local Testing
+![](../images/webconsole-dreamland-new-function-build.png)
 
-1. Create or modify function in Web Console
-2. Push changes to Git repository
-3. Run `dream inject push-all` to trigger local build
-4. Test function endpoints locally
+After a few seconds, the build should complete. Click on `Refresh` if it seems delayed. Then, click on the stack icon to view the ping_pong function.
 
-### Production Deployment
+![](../images/webconsole-dreamland-new-function-build-open-details.png)
 
-Functions automatically deploy when:
 
-1. Code is pushed to monitored Git branch
-2. CI/CD pipeline builds and deploys function
-3. Function becomes available on configured domains
+## Executing the Function
 
-### Testing HTTP Functions
-
-```bash
-# Test with curl
-curl -X GET "https://your-domain.com/api/endpoint?param=value"
-
-# Test with specific headers
-curl -H "Content-Type: application/json" \
-     -X POST "https://your-domain.com/api/endpoint" \
-     -d '{"key": "value"}'
+Now that our function is ready to go, let's test it out! Since we're running locally, we'll need to find the right port to send our requests to. The `substrate` node (or `gateway` if you're using one) handles HTTP traffic, so let's check its port with:
+```sh
+dream status substrate
 ```
 
-## Best Practices
+In my case, the HTTP port is 14529.
+```
+┌─────────────────────┬────────┬───────┐
+│ substrate@blackhole │ copies │     1 │
+│                     ├────────┼───────┤
+│                     │ dns    │ 14304 │
+│                     ├────────┼───────┤
+│                     │ http   │ 14529 │
+│                     ├────────┼───────┤
+│                     │ p2p    │ 14282 │
+└─────────────────────┴────────┴───────┘
+```
 
-### Performance
+You can test the function using `curl` as follows, making sure to replace `gftxhd6h0.blackhole.localtau` with your own generated domain:
+```sh
+curl -H "Host: gftxhd6h0.blackhole.localtau" http://127.0.0.1:14529/ping
+```
 
-- Keep functions **stateless** and lightweight
-- Use **appropriate memory allocation** for your workload
-- **Cache frequently used data** in global variables (within memory limits)
-- **Minimize cold starts** by keeping functions warm
+Output:
+```
+PONG
+```
 
-### Security
+For a smoother development experience, you can add the generated domain to your hosts file. On Unix-like systems (Linux/macOS), edit `/etc/hosts`:
+```sh
+sudo vi /etc/hosts
+```
 
-- **Validate all inputs** from HTTP requests
-- **Sanitize data** before processing
-- **Use HTTPS** for all production functions
-- **Implement proper error handling** without exposing sensitive data
+For me the generated domain is `gftxhd6h0.blackhole.localtau`. So I add:
+```
+127.0.0.1 gftxhd6h0.blackhole.localtau
+```
 
-### Code Organization
+Save and exit, then run `curl` again but without the `Host` header:
+```sh
+curl http://gftxhd6h0.blackhole.localtau:14529/ping
+```
 
-- **Use libraries** for shared functionality
-- **Keep functions focused** on single responsibilities
-- **Use descriptive names** for functions and parameters
-- **Document function purposes** and parameters
+Output:
+```
+PONG
+```
 
-### Error Handling
+If you've added the generated domain to your `/etc/hosts`, you can also test the function directly through the Web Console:
 
-- **Always check errors** from SDK operations
-- **Return meaningful error messages** to clients
-- **Log errors** for debugging (use fmt.Printf for local development)
-- **Use appropriate HTTP status codes**
+1. In the sidebar, click on `Functions` 
+2. Find your `ping` function in the list
+3. Click the thunder ⚡️ icon next to it to execute
 
-## Troubleshooting
+This will open a new tab and make a request to your function's endpoint.
 
-### Common Issues
+![](../images/webconsole-dreamland-new-function-exec.png)
 
-**Function not responding:**
+![](../images/webconsole-dreamland-new-function-exec-done.png)
 
-- Check build logs in Web Console
-- Verify function is exported with `//export`
-- Ensure correct entry point in configuration
+![](../images/webconsole-dreamland-new-function-exec-stats.png)
 
-**Import errors:**
+Congratulations! You've successfully created a (local) cloud and executed a serverless function on it!
 
-- Verify SDK version in go.mod matches supported version
-- Check import paths are correct
-- Ensure all required packages are imported
 
-**Performance issues:**
+## Troubleshooting Tips
+- If the curl command fails, ensure your port number matches the `dream status substrate` output
+- The Host header is only needed if you haven't added the domain to `/etc/hosts`
+- If the function build fails, check the Builds tab for detailed error messages
+- The `dream inject push-all` command might need to be run again if changes aren't reflecting
 
-- Check memory allocation is sufficient
-- Verify timeout settings are appropriate
-- Monitor function execution logs
-
-Functions are the core building blocks of Taubyte applications, providing scalable, secure, and efficient compute capabilities for your cloud applications.
