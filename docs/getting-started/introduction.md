@@ -33,7 +33,7 @@ As of now, these cloud computing capabilities are available:
 - **Local Development**: Test locally with the same environment as production
 - **P2P Architecture**: Secure peer-to-peer communication with automatic discovery
 - **Advanced Storage**: Content-addressed system with automatic deduplication
-- **Computing**: WebAssembly, unikernel & container execution with edge capabilities
+- **Computing**: WebAssembly execution with edge capabilities
 - **Security**: Zero-configuration HTTPS/TLS with automatic certificate management
 
 ### For Platform Engineers
