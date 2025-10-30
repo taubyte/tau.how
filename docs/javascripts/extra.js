@@ -32,64 +32,108 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add any custom event listeners or functionality here
 
   // --- Simple Carousel ---
-  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
-    const slides = Array.from(
-      carousel.querySelectorAll('.tb-carousel__slide')
-    );
-    const prevBtn = carousel.querySelector('[data-carousel-prev]');
-    const nextBtn = carousel.querySelector('[data-carousel-next]');
-    const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll(".tb-carousel__slide"));
+    const viewport = carousel.querySelector(".tb-carousel__viewport");
+    const prevBtn = carousel.querySelector("[data-carousel-prev]");
+    const nextBtn = carousel.querySelector("[data-carousel-next]");
+    const dotsContainer = carousel.querySelector("[data-carousel-dots]");
 
     if (slides.length === 0) return;
 
     let active = Math.max(
       0,
-      slides.findIndex((s) => s.classList.contains('is-active'))
+      slides.findIndex((s) => s.classList.contains("is-active"))
     );
+
+    // Preload images for faster display
+    slides.forEach((slide) => {
+      const img = slide.querySelector("img");
+      if (img) {
+        const pre = new Image();
+        pre.src = img.src;
+        // hint decoding to be async for smoother paint
+        img.decoding = "async";
+        // ensure high priority for first
+        if (slide.classList.contains("is-active")) {
+          img.loading = "eager";
+          img.fetchPriority = "high";
+        }
+      }
+    });
 
     // Build dots
     const dots = slides.map((_, idx) => {
-      const dot = document.createElement('button');
-      dot.className = 'tb-carousel__dot' + (idx === active ? ' is-active' : '');
-      dot.type = 'button';
-      dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
-      dot.addEventListener('click', () => goTo(idx));
+      const dot = document.createElement("button");
+      dot.className = "tb-carousel__dot" + (idx === active ? " is-active" : "");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
+      dot.addEventListener("click", () => goTo(idx));
       dotsContainer.appendChild(dot);
       return dot;
     });
 
-    function goTo(index) {
-      slides[active].classList.remove('is-active');
-      dots[active].classList.remove('is-active');
-      active = (index + slides.length) % slides.length;
-      slides[active].classList.add('is-active');
-      dots[active].classList.add('is-active');
+    function syncHeight() {
+      const img = slides[active].querySelector("img");
+      if (!img) return;
+      if (!img.complete) {
+        img.addEventListener("load", syncHeight, { once: true });
+        return;
+      }
+      const width = viewport.clientWidth || img.naturalWidth;
+      const ratio = img.naturalWidth
+        ? img.naturalHeight / img.naturalWidth
+        : img.height / img.width;
+      if (ratio && isFinite(ratio)) {
+        viewport.style.height = Math.max(10, Math.round(width * ratio)) + "px";
+      }
     }
 
-    function next() { goTo(active + 1); }
-    function prev() { goTo(active - 1); }
+    function goTo(index) {
+      slides[active].classList.remove("is-active");
+      dots[active].classList.remove("is-active");
+      active = (index + slides.length) % slides.length;
+      slides[active].classList.add("is-active");
+      dots[active].classList.add("is-active");
+      syncHeight();
+    }
 
-    nextBtn && nextBtn.addEventListener('click', next);
-    prevBtn && prevBtn.addEventListener('click', prev);
+    function next() {
+      goTo(active + 1);
+    }
+    function prev() {
+      goTo(active - 1);
+    }
+
+    nextBtn && nextBtn.addEventListener("click", next);
+    prevBtn && prevBtn.addEventListener("click", prev);
 
     // Autoplay
     let timer = setInterval(next, 5000);
-    carousel.addEventListener('mouseenter', () => clearInterval(timer));
-    carousel.addEventListener('mouseleave', () => {
+    carousel.addEventListener("mouseenter", () => clearInterval(timer));
+    carousel.addEventListener("mouseleave", () => {
       timer = setInterval(next, 5000);
     });
 
     // Basic swipe support
     let startX = 0;
-    carousel.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-    carousel.addEventListener('touchend', (e) => {
+    carousel.addEventListener(
+      "touchstart",
+      (e) => {
+        startX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    carousel.addEventListener("touchend", (e) => {
       const dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 40) {
         dx < 0 ? next() : prev();
       }
     });
+
+    // Initial height sync and on resize
+    syncHeight();
+    window.addEventListener("resize", syncHeight);
   });
 });
 
