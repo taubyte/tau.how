@@ -220,7 +220,6 @@ nav:
 
   - Tools:
       - tools/dream.md
-      - tools/tau-cli.md
       - tools/web-console.md
 
 # Extra CSS
