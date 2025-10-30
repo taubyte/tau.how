@@ -1,5 +1,7 @@
 # Getting Started
 
+<!-- Source: Getting Started guide index -->
+
 Welcome to Taubyte! This section will guide you through your first steps with Taubyte, from understanding what it is to deploying your first function.
 
 ## What You'll Learn

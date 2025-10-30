@@ -1,5 +1,7 @@
 # Key Concepts
 
+<!-- Source: https://tau.how/fundamentals/concepts/ - Key concepts and principles -->
+
 Understanding Taubyte's core concepts will help you make the most of the platform. These principles guide how Taubyte works and why it's designed the way it is.
 
 ## Git-Native Development

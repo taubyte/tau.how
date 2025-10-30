@@ -1,5 +1,7 @@
 # Introduction to Taubyte
 
+<!-- Sources: Based on official Taubyte documentation and platform architecture -->
+
 > **Note**: Taubyte is built from the ground up and does not depend on Kubernetes. We wanted something that doesn't carry the baggage of traditional cloud platforms.
 
 Taubyte's goal is `Local Development = Global Production`. This means:
@@ -13,6 +15,8 @@ Taubyte's goal is `Local Development = Global Production`. This means:
 Taubyte is an open-source, Git-native cloud computing platform that enables developers to build and maintain highly scalable cloud infrastructure with minimal configuration. It serves as an alternative to traditional cloud platforms like Vercel, Netlify, Cloudflare, and AWS services.
 
 ## Core Capabilities
+
+<!-- Source: https://tau.how/02-platform-getting-started/00-what-is-taubyte/ -->
 
 As of now, these cloud computing capabilities are available:
 

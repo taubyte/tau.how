@@ -1,5 +1,7 @@
 # CI/CD
 
+<!-- Source: CI/CD build system documentation from github.com/taubyte/tau -->
+
 Taubyte has a built-in CI/CD system that automatically builds and deploys your applications when you push changes to monitored Git branches. The build process is entirely defined through the `.taubyte` folder in your codebase.
 
 ## How It Works

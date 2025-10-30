@@ -1,5 +1,7 @@
 # Manual Deployment
 
+<!-- Source: https://tau.how/platform/deployment/ - Manual deployment guide -->
+
 This guide covers manually deploying a Taubyte cloud to production infrastructure. This gives you complete control over the setup process and understanding of how Taubyte works under the hood.
 
 ## Overview

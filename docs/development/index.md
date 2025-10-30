@@ -1,5 +1,7 @@
 # Development
 
+<!-- Source: Development section overview -->
+
 This section covers everything you need to know about building applications on Taubyte. From creating projects to deploying complex distributed systems, you'll learn how to leverage Taubyte's capabilities to build scalable, reliable applications.
 
 ## Development Philosophy

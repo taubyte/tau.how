@@ -1,5 +1,7 @@
 # Web Console
 
+<!-- Source: console.taubyte.com - Web-based interface documentation -->
+
 The Taubyte Web Console is a browser-based interface that provides a visual way to manage projects, create resources, write code, and monitor deployments. It works with both development (dream) and production environments.
 
 ## Accessing the Console

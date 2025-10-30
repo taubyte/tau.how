@@ -1,5 +1,7 @@
 # Projects
 
+<!-- Source: Based on Web Console functionality at console.taubyte.com -->
+
 A project in Taubyte serves as the top-level container for all your resources including functions, websites, databases, storage, and messaging channels. Every resource you create belongs to a project.
 
 ## Creating a Project

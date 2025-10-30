@@ -1,5 +1,7 @@
 # Your First Function
 
+<!-- Source: Based on Taubyte Web Console functionality and function templates at console.taubyte.com -->
+
 In this guide, we'll create a project and deploy your first WebAssembly serverless function using the Web Console.
 
 ## Step 1: Create a Project

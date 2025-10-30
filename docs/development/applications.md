@@ -1,5 +1,7 @@
 # Applications
 
+<!-- Source: Application organization features from console.taubyte.com -->
+
 Applications in Taubyte provide a way to organize and manage related resources within a project. They enable better structure, granular access control, and logical separation of functionality while maintaining access to both application-specific and global resources.
 
 ## Understanding Applications

@@ -1,5 +1,7 @@
 # Storage
 
+<!-- Source: Object storage capabilities documentation -->
+
 Taubyte provides distributed object storage for files, images, documents, and any other binary data. Storage buckets are created on-demand and accessed through a simple file-based interface with automatic replication and global distribution.
 
 ## Storage Characteristics
