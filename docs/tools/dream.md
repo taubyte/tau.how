@@ -1,6 +1,6 @@
 # Dream CLI
 
-<!-- Source: https://tau.how/tools/dream/ -->
+<!-- Source: docs-old/02-platform-getting-started/04-dream.md -->
 
 Dream is a development tool that allows you to spin up a complete Taubyte cloud locally on your machine. It provides a perfect development environment that mirrors production behavior while keeping everything isolated and easy to manage.
 

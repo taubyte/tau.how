@@ -1,6 +1,6 @@
 # Development
 
-<!-- Source: https://tau.how/development/ -->
+<!-- Source: Based on docs-old/01-dev-getting-started/ structure -->
 
 This section covers everything you need to know about building applications on Taubyte. From creating projects to deploying complex distributed systems, you'll learn how to leverage Taubyte's capabilities to build scalable, reliable applications.
 

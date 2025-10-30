@@ -1,6 +1,6 @@
 # Spore Drive - Automated Deployment
 
-<!-- Source: https://tau.how/platform/spore-drive/ -->
+<!-- Source: docs-old/02-platform-getting-started/11-spore-drive.md -->
 
 While [manual deployment](deployment.md) gives you complete control over the setup process, Spore Drive automates cloud deployment with just a few lines of code. It's designed to align with Taubyte's philosophy of simplification and developer-friendly tools.
 

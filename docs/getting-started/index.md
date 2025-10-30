@@ -1,6 +1,6 @@
 # Getting Started
 
-<!-- Source: https://tau.how/getting-started/ -->
+<!-- Source: Based on docs-old structure -->
 
 Welcome to Taubyte! This section will guide you through your first steps with Taubyte, from understanding what it is to deploying your first function.
 

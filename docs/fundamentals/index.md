@@ -1,6 +1,6 @@
 # Fundamentals
 
-<!-- Source: https://tau.how/fundamentals/ -->
+<!-- Source: Based on docs-old structure -->
 
 This section covers the core concepts and architecture that make Taubyte unique. Understanding these fundamentals will help you make better decisions when building applications and managing infrastructure.
 

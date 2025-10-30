@@ -1,6 +1,6 @@
 # Projects
 
-<!-- Source: https://tau.how/development/projects/ -->
+<!-- Source: docs-old/01-dev-getting-started/02-first-project.md -->
 
 A project in Taubyte serves as the top-level container for all your resources including functions, websites, databases, storage, and messaging channels. Every resource you create belongs to a project.
 

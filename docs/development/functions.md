@@ -1,6 +1,6 @@
 # Functions
 
-<!-- Source: https://tau.how/development/functions/ -->
+<!-- Source: docs-old/01-dev-getting-started/03-first-function.md -->
 
 Serverless functions in Taubyte are WebAssembly-based, event-driven compute units that automatically scale and execute in response to various triggers like HTTP requests, WebSocket connections, or Pub/Sub messages.
 

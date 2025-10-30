@@ -1,6 +1,6 @@
 # Your First Function
 
-<!-- Source: https://tau.how/getting-started/first-function/ -->
+<!-- Source: docs-old/01-dev-getting-started/03-first-function.md -->
 
 In this guide, we'll create a project and deploy your first WebAssembly serverless function using the Web Console.
 

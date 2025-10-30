@@ -1,6 +1,6 @@
 # Installation
 
-<!-- Source: https://tau.how/getting-started/installation/ -->
+<!-- Source: docs-old/02-platform-getting-started/04-dream.md -->
 
 To get started with Taubyte development, you'll need to install the Dream CLI tool. Dream allows you to spin up your own Taubyte cloud right on your local machine - think of it as your personal playground for building and testing cloud apps.
 

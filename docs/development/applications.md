@@ -1,6 +1,6 @@
 # Applications
 
-<!-- Source: https://tau.how/development/applications/ -->
+<!-- Source: docs-old/01-dev-getting-started/09-applications.md -->
 
 Applications in Taubyte provide a way to organize and manage related resources within a project. They enable better structure, granular access control, and logical separation of functionality while maintaining access to both application-specific and global resources.
 

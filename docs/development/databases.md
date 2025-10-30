@@ -1,6 +1,6 @@
 # Databases
 
-<!-- Source: https://tau.how/development/databases/ -->
+<!-- Source: docs-old/01-dev-getting-started/06-create-and-use-database.md -->
 
 Taubyte provides a distributed key-value database system that automatically replicates across nodes and scales with your application. Unlike traditional SQL databases, Taubyte databases are created on-demand and accessed through a simple key-value interface.
 

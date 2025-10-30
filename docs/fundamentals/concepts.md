@@ -1,6 +1,6 @@
 # Key Concepts
 
-<!-- Source: https://tau.how/fundamentals/concepts/ -->
+<!-- Source: Based on docs-old structure and platform documentation -->
 
 Understanding Taubyte's core concepts will help you make the most of the platform. These principles guide how Taubyte works and why it's designed the way it is.
 

@@ -1,6 +1,6 @@
 # Introduction to Taubyte
 
-<!-- Source: https://tau.how/getting-started/introduction/ -->
+<!-- Source: docs-old/02-platform-getting-started/00-what-is-taubyte copy.md -->
 
 > **Note**: Taubyte is built from the ground up and does not depend on Kubernetes. We wanted something that doesn't carry the baggage of traditional cloud platforms.
 

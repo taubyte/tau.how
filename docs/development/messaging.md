@@ -1,6 +1,6 @@
 # Messaging (Pub/Sub)
 
-<!-- Source: https://tau.how/development/messaging/ -->
+<!-- Source: docs-old/01-dev-getting-started/07-create-and-use-messaging.md -->
 
 Taubyte provides a built-in publish-subscribe messaging system for real-time communication between functions, WebSocket connections, and external clients. This enables building real-time applications like chat systems, notifications, live updates, and event-driven architectures.
 

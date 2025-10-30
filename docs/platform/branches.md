@@ -1,6 +1,6 @@
 # Working with Branches
 
-<!-- Source: https://tau.how/platform/branches/ -->
+<!-- Source: docs-old/01-dev-getting-started/11-work-with-branches.md -->
 
 Taubyte's Git-native architecture makes working with branches a powerful way to manage different environments and feature development. Both `tau` (production) and `dream` (development) support running on specific Git branches, enabling branch-based environments.
 

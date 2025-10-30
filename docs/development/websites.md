@@ -1,6 +1,6 @@
 # Websites
 
-<!-- Source: https://tau.how/development/websites/ -->
+<!-- Source: docs-old/01-dev-getting-started/04-first-website.md -->
 
 Taubyte provides built-in static website hosting with automatic HTTPS, global distribution, and seamless integration with your functions and other resources. Websites can serve HTML, CSS, JavaScript, and other static assets.
 

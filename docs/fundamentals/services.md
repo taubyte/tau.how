@@ -1,6 +1,6 @@
 # Services
 
-<!-- Source: https://tau.how/fundamentals/services/ -->
+<!-- Source: docs-old/02-platform-getting-started/02-services.md -->
 
 Taubyte's distributed architecture consists of several core services that work together to provide cloud computing capabilities. Each service has a specific role and can be replicated across multiple nodes for high availability and scalability.
 

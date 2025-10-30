@@ -1,6 +1,6 @@
 # Going to Production
 
-<!-- Source: https://tau.how/platform/production/ -->
+<!-- Source: docs-old/01-dev-getting-started/99-go-production.md -->
 
 With Taubyte, going to production is a straightforward process. The platform's Git-native approach means your local development environment closely matches production, making the transition smooth and predictable.
 

@@ -1,6 +1,6 @@
 # Start a Local Cloud
 
-<!-- Source: https://tau.how/getting-started/local-cloud/ -->
+<!-- Source: docs-old/01-dev-getting-started/01-local-cloud.md -->
 
 Let's dive right in and get our hands dirty with some real cloud development! We'll use `dream` to spin up your own Taubyte cloud right on your local machine.
 
