@@ -1,6 +1,6 @@
 # Welcome to Taubyte Documentation
 
-<!-- Source: Main documentation index - Based on official Taubyte platform documentation -->
+<!-- Source: https://tau.how/ -->
 
 Taubyte is an open-source Serverless Operating System that's git-native, code-first, secure, extendable, and designed for developers. It's easy to deploy and manage, works locally, and can be tested with code, helping you build faster with fewer issues.
 

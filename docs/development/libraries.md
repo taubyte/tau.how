@@ -1,6 +1,6 @@
 # Libraries
 
-<!-- Source: Library system and code organization features -->
+<!-- Source: https://tau.how/development/libraries/ -->
 
 Libraries in Taubyte allow you to move serverless function code outside of the main code repository, enabling code sharing, better organization, and granular access control. Each library has its own repository and can be used either as a source for functions or as a dependency.
 

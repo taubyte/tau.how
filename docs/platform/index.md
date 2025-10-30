@@ -1,6 +1,6 @@
 # Platform Management
 
-<!-- Source: Platform management overview -->
+<!-- Source: https://tau.how/platform/ -->
 
 This section covers deploying and managing Taubyte cloud infrastructure in production. You'll learn about deployment strategies, CI/CD pipelines, environment management, and operational best practices.
 

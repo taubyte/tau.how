@@ -1,6 +1,6 @@
 # Tau CLI
 
-<!-- Source: Tau CLI management tool documentation - Note: Some commands may be planned features -->
+<!-- Source: https://tau.how/tools/tau-cli/ -->
 
 The Tau CLI is a command-line tool for managing production Taubyte clouds. It provides direct access to cloud operations, monitoring, and configuration management for production environments.
 
