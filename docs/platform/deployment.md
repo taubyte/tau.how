@@ -2,470 +2,469 @@
 
 <!-- Source: docs-old/02-platform-getting-started/10-deploy-a-cloud.md -->
 
-This guide covers manually deploying a Taubyte cloud to production infrastructure. This gives you complete control over the setup process and understanding of how Taubyte works under the hood.
+## Introduction
 
-## Overview
+Every Taubyte-based Cloud is associated with a Fully Qualified Domain Name (FQDN). You can use any domain or sub-domain you control. For instance, I've chosen `enterprise.starships.ws` for Starship Enterprise's Web Services.
 
-Every Taubyte-based cloud is associated with a Fully Qualified Domain Name (FQDN). You can use any domain or sub-domain you control. The manual deployment process involves:
+Developers often require a temporary sub-domain for testing. You can use a sub-domain of your main domain or a different one. While `g.enterprise.starships.ws` or `el.starships.ws` are valid, my passion for Sci-Fi inspires me to select `e.ftll.ink` (Enterprise's Faster Than Light Link).
 
-1. Setting up infrastructure (bare metal or VMs)
-2. Configuring networking and firewall rules
-3. Installing and configuring Tau on each host
-4. Setting up domain configuration and certificates
+> 💡 **Note**: The domain can be local, but it must resolve on the hosts where `tau` is installed.
 
-## Domain Planning
+## Infrastructure Setup
 
-Choose your domains carefully as they define your cloud's identity:
+Choose your infrastructure. The only requirement is hosts (bare metal or VMs) running Ubuntu.
 
-### Primary Domain
+For this example, I provisioned 3 VMs:
 
-Your main cloud domain (e.g., `enterprise.starships.ws`)
+| Name                           | Location     | IP             |
+| ------------------------------ | ------------ | -------------- |
+| host-001-enterprise-starships-ws | Iowa         | 34.133.173.124 |
+| host-002-enterprise-starships-ws | Toronto      | 34.130.131.76  |
+| host-003-enterprise-starships-ws | Los Angeles  | 35.235.122.141 |
 
-### Generated Domain
+> 💡 **Note**: This setup is temporary and will be decommissioned eventually. It remains accessible for testing while operational.
 
-A sub-domain for auto-generated resources (e.g., `g.enterprise.starships.ws` or `e.ftll.ink`)
+## Firewall Configuration
 
-> **Note**: The domain can be local, but it must resolve on all hosts where `tau` is installed.
+Ensure the following ports are open:
 
-## Infrastructure Requirements
+| Ports        | Protocols | Description                                          |
+| ------------ | --------- | ---------------------------------------------------- |
+| 4242, 4247, 4252 | TCP       | For Peer-to-peer communication and IPFS.             |
+| 80, 443      | TCP       | For HTTP and HTTPS - serving APIs and hosted resources. |
+| 53, 953      | TCP, UDP  | For DNS resolution.                                   |
 
-### Host Requirements
+## Preparing the Hosts
 
-- **Operating System**: Ubuntu (other Linux distributions may work but Ubuntu is recommended)
-- **Architecture**: x86_64 or ARM64
-- **Resources**: Minimum 2GB RAM, 20GB storage per node
-- **Network**: Public IP addresses or proper NAT configuration
+### Installing curl & vim
 
-### Example Infrastructure
+Ensure `curl` and `vim` (or your preferred text editor) are installed:
 
-For demonstration, here's a typical 3-node setup:
-
-| Name                | Location    | IP             | Role                 |
-| ------------------- | ----------- | -------------- | -------------------- |
-| host-001-enterprise | Iowa        | 34.133.173.124 | Bootstrap + Services |
-| host-002-enterprise | Toronto     | 34.130.131.76  | Services             |
-| host-003-enterprise | Los Angeles | 35.235.122.141 | Services             |
-
-### Firewall Configuration
-
-Ensure these ports are open on all hosts:
-
-| Ports            | Protocols | Description                                 |
-| ---------------- | --------- | ------------------------------------------- |
-| 4242, 4247, 4252 | TCP       | Peer-to-peer communication and IPFS         |
-| 80, 443          | TCP       | HTTP and HTTPS - serving APIs and resources |
-| 53, 953          | TCP, UDP  | DNS resolution                              |
-
-## Host Preparation
-
-### Initial Setup
-
-On each host, install required packages:
-
-```bash
+```sh
 sudo apt update
 sudo apt install curl vim
 ```
 
-### Install Tau
+> 💡 **Tip**: If you're unfamiliar with `vim`, try [vim-adventures](https://vim-adventures.com/) for a fun introduction.
 
-Download and install the latest Tau binary:
+### Freeing Up DNS Ports
 
-```bash
-# Download tau
-curl -L https://github.com/taubyte/tau/releases/latest/download/tau-linux-amd64.tar.gz | tar -xz
+Adjust DNS settings for the seer service:
 
-# Make executable and move to PATH
-chmod +x tau
-sudo mv tau /usr/local/bin/
+```sh
+sudo vim /etc/systemd/resolved.conf
 ```
 
-Verify installation:
+In edit mode (`:i`), configure:
 
-```bash
-tau --version
+```ini
+DNS=1.1.1.1
+DNSStubListener=no
 ```
 
-### Create Configuration Directory
+Apply the changes:
 
-```bash
-sudo mkdir -p /etc/tau
-cd /etc/tau
+```sh
+sudo systemctl restart systemd-resolved.service
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
-## Domain and Key Generation
+### Docker Installation
 
-### Domain Validation Keys
+Install Docker:
 
-Generate domain validation keys for Let's Encrypt certificates:
-
-```bash
-# Generate domain validation key
-tau tools domain key generate \
-  --domain enterprise.starships.ws \
-  --output /etc/tau/domain_validation.key
+```sh
+curl -fsSL https://get.docker.com | sh
 ```
 
-### P2P Swarm Key
+## Setting Up the First Host
 
-Generate a shared key for P2P communication:
+The initial host, `host-001-enterprise-starships-ws`, will generate our cloud's secrets.
 
-```bash
-# Generate swarm key (run once, then distribute to all nodes)
-tau tools p2p swarm key generate --output /etc/tau/swarm.key
+### Installing Tau
+
+Install `tau`:
+
+```sh
+curl https://get.tau.link/tau | sh
 ```
 
-> **Important**: The swarm key must be identical on all nodes in your cloud.
+> 💡 **Note**: A single host can support multiple nodes if ports do not overlap. For this guide, we use a one-node-per-host configuration.
 
-## Node Configuration
+Upon successful installation, you should see:
 
-### Create Node Configuration
+```
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3982  100  3982    0     0   3962      0  0:00:01  0:00:01 --:--:--  3966
+Downloading release: v1.1.2
+From: https://github.com/taubyte/tau/releases/download/v1.1.2/tau_1.1.2_linux_amd64.tar.gz
+######################################################################## 100.0%
+Installation complete
+```
 
-Create `/etc/tau/config.yaml` on each host:
+### Configuring Your Node
+
+Configure the node with:
+
+```sh
+sudo tau config generate -n enterprise.starships.ws \
+      -s compute --services all --ip 34.133.173.124 \
+      --dv --swarm 
+```
+
+Here's a quick rundown of the options used:
+- `--services all` activates all available services.
+- `-n` specifies the domain name (or network name) for the node.
+- `-s` assigns a name to this configuration, often referred to as a "shape."
+- `--ip` indicates the IP address the node should use for announcements.
+- `--dv` generates a domain validation key pair.
+- `--swarm` creates a swarm key for network clustering.
+
+> 💡 **Note**: Enabling all protocols on a single node is not advisable in deployments with meaninful workloads. You should be mindful of not having services like `substrate` or `monkey` eating up all the resources.
+
+Upon successful configuration, you'll receive the node's ID:
+
+```
+[INFO] ID: 12D3KooWKv5oNF2a6h9sYzRUPEAaYe6feTbBbcLYZYVFrMDDCHzY
+```
+
+#### Fine-tuning the Configuration
+
+Adjust the configuration for optimal performance:
+
+```sh
+sudo vi /tb/config/compute.yaml
+```
+
+Update the `generated` domain to match your preferred domain, e.g., `e.ftll.ink`:
 
 ```yaml
-# Basic node configuration
-p2p:
-  listen: ["/ip4/0.0.0.0/tcp/4242", "/ip4/0.0.0.0/tcp/4247"]
-  announce: ["/ip4/YOUR_PUBLIC_IP/tcp/4242", "/ip4/YOUR_PUBLIC_IP/tcp/4247"]
-  swarm:
-    key: /etc/tau/swarm.key
+generated: e.ftll.ink
+```
 
-dns:
-  domain: enterprise.starships.ws
+Remove the `gateway` protocol since `gateway` and `substrate` cannot coexist:
 
+```yaml
+privatekey: <redacted>
+swarmkey: keys/swarm.key
 services:
-  - auth
-  - tns
-  - hoarder
-  - seer
-  - substrate
-  - patrick
-  - monkey
-
-location:
-  latitude: 40.7128
-  longitude: -74.0060
-```
-
-Replace `YOUR_PUBLIC_IP` with each node's actual public IP address.
-
-### Bootstrap Node Configuration
-
-On the first (bootstrap) node, add bootstrap configuration:
-
-```yaml
-# Additional bootstrap configuration
-bootstrap: true
-p2p:
-  bootstrap:
-    - /ip4/34.133.173.124/tcp/4242/p2p/BOOTSTRAP_PEER_ID
-```
-
-### Service-Specific Configuration
-
-#### Auth Service Configuration
-
-```yaml
-auth:
-  domain_validation_key: /etc/tau/domain_validation.key
-
-acme:
-  enabled: true
-  endpoint: https://acme-v02.api.letsencrypt.org/directory
-  email: admin@enterprise.starships.ws
-```
-
-#### DNS Configuration
-
-```yaml
-dns:
-  domain: enterprise.starships.ws
-  generated: e.ftll.ink
-
-seer:
-  dns_discovery: true
-```
-
-### Complete Configuration Example
-
-Here's a complete configuration for a production node:
-
-```yaml
-# /etc/tau/config.yaml
-version: v0.1
-
-# Network configuration
-p2p:
-  listen:
+    - auth
+    - patrick
+    - monkey
+    - tns
+    - hoarder
+    - substrate
+    - seer
+p2p-listen:
     - /ip4/0.0.0.0/tcp/4242
-    - /ip4/0.0.0.0/tcp/4247
-  announce:
+p2p-announce:
     - /ip4/34.133.173.124/tcp/4242
-    - /ip4/34.133.173.124/tcp/4247
-  swarm:
-    key: /etc/tau/swarm.key
-  bootstrap:
-    - /ip4/34.133.173.124/tcp/4242
-
-# Domain configuration
-dns:
-  domain: enterprise.starships.ws
-  generated: e.ftll.ink
-
-# Services this node will run
-services:
-  - auth
-  - tns
-  - hoarder
-  - seer
-  - substrate
-  - patrick
-  - monkey
-
-# Geographic location for routing optimization
+ports:
+    main: 4242
+    lite: 4247
+    ipfs: 4252
 location:
-  latitude: 41.2524
-  longitude: -95.9980
-
-# Auth service configuration
-auth:
-  domain_validation_key: /etc/tau/domain_validation.key
-
-# ACME configuration for automatic HTTPS
-acme:
-  enabled: true
-  endpoint: https://acme-v02.api.letsencrypt.org/directory
-  email: admin@enterprise.starships.ws
-
-# Storage configuration
-storage:
-  path: /var/lib/tau/storage
-
-# Logging configuration
-logging:
-  level: info
-  output: /var/log/tau/tau.log
+    lat: 40.076897
+    long: -109.33771
+network-fqdn: enterprise.starships.ws
+domains:
+    key:
+        private: keys/dv_private.pem
+        public: keys/dv_public.pem
+    generated: e.ftll.ink
+plugins: {}
 ```
 
-## Service Management
+> 💡 **Tip**: Correct the location manually if inaccurately determined.
 
-### Create Systemd Service
+Validate the configuration:
 
-Create `/etc/systemd/system/tau.service`:
+```sh
+sudo tau conf validate -s compute
+```
+
+No error messages indicate a correct configuration.
+
+## Manually Starting the Node
+
+Start the node manually:
+
+```sh
+sudo tau start -s compute
+```
+
+Verify the node is active by navigating to [slimdig.com](https://slimdig.com) and performing a check with `seer.tau.<your domain>`, your server's public IP, and clicking the `A` button.
+
+![](/images/slimdig-seer-tau-ent-starships-ws.png)
+
+Seeing your server's IP address verifies the node is operational.
+
+## Transitioning to a Systemd Service
+
+Convert the manually started service into a systemd service for resilience:
+
+1. Stop the service with CTRL-C.
+2. Create a systemd service file:
+
+```sh
+sudo vim /lib/systemd/system/tau@.service
+```
+
+Add the following configuration:
 
 ```ini
 [Unit]
-Description=Taubyte Cloud Node
-After=network.target
-Wants=network.target
+Description=Taubyte Tau Service Running %i
 
 [Service]
 Type=simple
-User=root
-ExecStart=/usr/local/bin/tau start --config /etc/tau/config.yaml
-Restart=on-failure
-RestartSec=5
+ExecStart=/tb/bin/tau start -s %i
 StandardOutput=journal
-StandardError=journal
-SyslogIdentifier=tau
-KillMode=mixed
-KillSignal=SIGINT
+User=root
+Group=root
 
-# Security settings
-NoNewPrivileges=true
-ProtectSystem=strict
-ProtectHome=true
-ReadWritePaths=/etc/tau /var/lib/tau /var/log/tau
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+
+Restart=always
+RestartSec=1
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-### Enable and Start Service
+Enable and start the service:
 
-```bash
-# Create required directories
-sudo mkdir -p /var/lib/tau/storage /var/log/tau
-
-# Reload systemd and enable service
-sudo systemctl daemon-reload
-sudo systemctl enable tau
-sudo systemctl start tau
-
-# Check service status
-sudo systemctl status tau
-
-# View logs
-sudo journalctl -u tau -f
+```sh
+sudo systemctl enable tau@compute
+sudo systemctl start tau@compute
 ```
 
-## DNS Configuration
+Check the service status:
 
-### Domain Setup
-
-Configure your domain's DNS to point to your Tau nodes:
-
-```bash
-# A records for your main domain
-enterprise.starships.ws.    IN  A   34.133.173.124
-enterprise.starships.ws.    IN  A   34.130.131.76
-enterprise.starships.ws.    IN  A   35.235.122.141
-
-# Generated domain (can point to same IPs or subset)
-e.ftll.ink.                 IN  A   34.133.173.124
-e.ftll.ink.                 IN  A   34.130.131.76
-
-# Wildcard for generated subdomains
-*.e.ftll.ink.               IN  A   34.133.173.124
-*.e.ftll.ink.               IN  A   34.130.131.76
+```sh
+sudo systemctl status tau@compute
 ```
 
-### Health Checks
+You should see:
 
-Verify your cloud is running:
+```
+● tau@compute.service - Taubyte Tau Service Running compute
+     Loaded: loaded (/lib/systemd/system/tau@.service; enabled; vendor preset: enabled)
+     Active: active (running) since Fri 2024-02-09 22:43:52 UTC; 1min 5s ago
+   Main PID: 4588 (tau)
+      Tasks: 14 (limit: 38492)
+     Memory: 202.0M
+        CPU: 53.521s
+     CGroup: /system.slice/system-tau.slice/tau@compute.service
+             └─4588 /tb/bin/tau start -s compute
 
-```bash
-# Check HTTP endpoint
-curl -I http://enterprise.starships.ws
-
-# Check DNS resolution
-dig enterprise.starships.ws
-
-# Check P2P connectivity
-tau tools p2p ping /ip4/34.133.173.124/tcp/4242
+Feb 09 22:43:52 host-001-enterprise-starships-ws systemd[1]: Started Taubyte Tau Service Running compute.
 ```
 
-## Security Considerations
+This ensures your node remains operational across restarts and updates.
 
-### Firewall Rules
+## Configuring DNS for Load Balancing
 
-Configure UFW (Ubuntu Firewall):
+The Seer protocol enables DNS load balancing within the your cloud, translating protocols into valid IP addresses using the `<protocol>.tau.<domain>` convention. This allows efficient load balancing with a simple CNAME (or ALIAS) record.
 
-```bash
-# Basic firewall setup
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
+### Delegating the `tau` Subdomain
 
-# Allow SSH (adjust port as needed)
-sudo ufw allow 22/tcp
+Delegate the `tau` subdomain to nodes running the Seer protocol. Here's how with Namecheap for `starships.ws`:
 
-# Allow Tau ports
-sudo ufw allow 4242/tcp
-sudo ufw allow 4247/tcp
-sudo ufw allow 4252/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 53
-sudo ufw allow 953
+Add the Node as an A Record:
 
-# Enable firewall
-sudo ufw enable
+   - Select the A record type.
+   - Name it `seer.<domain>`.
+   - Enter the node's IP address.
+   - Validate the entry.
+
+   ![](/images/add-a-seer-entry-node-1-enterprise-starships-ws.png)
+
+Delegate with an NS Record:
+
+   - Choose the NS record type.
+   - Label it `tau.<domain>`.
+   - Set its value to `seer.<domain>`.
+   - Validate the entry.
+
+   ![](/images/add-ns-entry-enterprise-starships-ws.png)
+
+### Verifying the Configuration
+
+Use a tool like slimdig to verify the DNS configuration:
+
+- Enter `<protocol>.tau.<domain>` (e.g., `tns.tau.enterprise.starships.ws`).
+- Set the query to a public DNS server like 8.8.8.8.
+- Click the `A` button to perform the lookup.
+
+![](/images/slimdig-tau-entry-enterprise-starships-ws.png)
+
+> 💡 **Note**: DNS propagation can delay effectiveness, requiring multiple attempts over several minutes.
+
+Congratulations, your cloud is operational! If you'd like to try it out right away, check out [Take it for a spin!](../12-try-the-cloud).
+
+## Adding the Other Nodes
+
+To expand your Taubyte-based Cloud, add more hosts.
+
+### Exporting the Configuration Template
+
+Create a configuration template to replicate the setup across additional hosts:
+
+```sh
+sudo tau config export -s compute --protect
 ```
 
-### SSL/TLS Certificates
+Enter a password for encryption:
 
-Taubyte automatically manages Let's Encrypt certificates when properly configured:
+```txt
+Password?
+```
+
+The exported configuration will look like this (omit `location` for other nodes):
+
+The exported configuration will resemble the following (omit the `location` to let it be automatically determined for the other nodes):
+```yaml
+origin:
+  shape: compute
+  host: host-001-enterprise-starships-ws
+  time: 2024-02-12T05:41:25.218338331Z
+  protected: true
+source:
+  swarmkey: PZuGcV96BbfM...2RE8ZEfR2pZoM29z8
+  services:
+  - auth
+  - patrick
+  - monkey
+  - tns
+  - hoarder
+  - substrate
+  - seer
+  p2p-listen:
+  - /ip4/0.0.0.0/tcp/4242
+  p2p-announce:
+  - /ip4/34.133.173.124/tcp/4242
+  ports:
+    main: 4242
+    lite: 4247
+    ipfs: 4252
+  network-fqdn: enterprise.starships.ws
+  domains:
+    key:
+      private: BDN9SEUFsolg...25pUUrUpFxSFhjlCv
+      public: cmS5kmov/cJ9...NezzWwcYVj4YVNOg
+    generated: e.ftll.ink
+  plugins: {}
+```
+
+Retrieve the first node's [multi-address](https://docs.libp2p.io/concepts/fundamentals/addressing/):
+
+```sh
+sudo tau config show -s compute | grep Announce
+```
+
+The output provides the address for peer connections:
+
+```txt
+│ P2PAnnounce │ /ip4/34.133.173.124/tcp/4242/p2p/12D3KooWKv5oNF2a6h9sYzRUPEAaYe6feTbBbcLYZYVFrMDDCHzY │
+```
+
+### Preparing the Additional Hosts
+
+SSH into the remaining hosts, prepare them as described in the [Preparing the Hosts](#preparing-the-hosts) section. Transfer the `compute.tmpl.yaml` template and the systemd service file to each.
+
+### Installing Tau
+
+Install `tau` on each new host:
+
+```sh
+curl https://get.tau.link/tau | sh
+```
+
+### Configuring the Additional Hosts
+
+For the Second Host:
+
+    ```sh
+    $ sudo tau config gen --ip 34.130.131.76 --use compute.tmpl.yaml  --bootstrap /ip4/34.133.173.124/tcp/4242/p2p/12D3KooWKv5oNF2a6h9sYzRUPEAaYe6feTbBbcLYZYVFrMDDCHzY
+    ```
+
+For the Third Host:
+
+    ```sh
+    $ sudo tau config gen --ip 35.235.122.141 --use compute.tmpl.yaml  --bootstrap /ip4/34.133.173.124/tcp/4242/p2p/12D3KooWKv5oNF2a6h9sYzRUPEAaYe6feTbBbcLYZYVFrMDDCHzY
+    ```
+
+
+### Systemd Setup
+
+Ensure the `tau` service starts automatically on each host:
+
+```sh
+sudo cp ~/tau@.service /lib/systemd/system/tau@.service
+sudo systemctl enable tau@compute
+sudo systemctl start tau@compute
+```
+
+Verify the service status:
+
+```sh
+sudo systemctl status tau@compute
+```
+
+### DNS Verification
+
+Ensure all nodes are registered and operational using DNS queries:
+
+1. Enter `<protocol>.tau.<domain>` and select `A` to perform the query.
+
+![](/images/slimdig-all-three-nodes-running-enterprise-starships-ws.png)
+
+All three servers should be listed, indicating successful integration.
+
+## Final Adjustments
+
+### DNS Adjustments
+
+**Main Domain:** Add `A` records for each new host.
+
+![](/images/add-for-all-a-seer-tau-entry-enterprise-starships-ws.png)
+
+A DNS lookup should reflect all active hosts:
+
+![](/images/slimdig-all-seer-tau-ent-starships-ws.png)
+
+**Generated Domain:** Delegate the subdomain to your cloud by adding an `NS` entry.
+
+![](/images/add-ns-entry-s-ftll-ink.png)
+
+### Bootstrapping for Recovery and Expansion
+
+Ensure all nodes are aware of each other:
+
+1. Collect and share multi-addresses among nodes.
+2. Update the `peers` section in each node's configuration.
 
 ```yaml
-acme:
-  enabled: true
-  endpoint: https://acme-v02.api.letsencrypt.org/directory
-  email: admin@yourdomain.com
-
-# Certificate storage
-auth:
-  domain_validation_key: /etc/tau/domain_validation.key
+peers:
+  - /ip4/34.133.173.124/tcp/4242/p2p/12D3KooWKv5oNF2a6h9sYzRUPEAaYe6feTbBbcLYZYVFrMDDCHzY
+  - /ip4/34.130.131.76/tcp/4242/p2p/12D3KooWHrp2t9npN2TW4dv47uEvJh6qfs6U2ymhkiVVNpcR3cWE
+  - /ip4/35.235.122.141/tcp/4242/p2p/12D3KooWKQJfLU74VJzsvhAKUJ8KQidBr1CowMo1e1YRrSb2vTZd
 ```
 
-### Access Control
+Validate the configuration:
 
-- Limit SSH access to specific IP ranges
-- Use key-based authentication for SSH
-- Regularly update and patch the OS
-- Monitor logs for suspicious activity
-
-## Monitoring and Maintenance
-
-### Health Monitoring
-
-```bash
-# Check service status
-sudo systemctl status tau
-
-# Monitor resource usage
-htop
-df -h
-free -h
-
-# Check network connectivity
-netstat -tulpn | grep tau
-ss -tulpn | grep 4242
+```sh
+sudo tau config check -s compute
 ```
 
-### Log Management
+No error messages indicate readiness.
 
-```bash
-# View live logs
-sudo journalctl -u tau -f
+### Restart?
 
-# View recent logs
-sudo journalctl -u tau --since "1 hour ago"
+No manual restarts are needed. Discovered peers are maintained in a persistent database, ensuring automatic recognition after recovery or reconfiguration.
 
-# Check log disk usage
-sudo du -sh /var/log/tau/
-```
-
-### Backup Procedures
-
-```bash
-# Backup configuration
-sudo tar -czf tau-config-backup.tar.gz /etc/tau/
-
-# Backup data (if using local storage)
-sudo tar -czf tau-data-backup.tar.gz /var/lib/tau/
-
-# Backup keys (store securely!)
-sudo cp /etc/tau/swarm.key swarm.key.backup
-sudo cp /etc/tau/domain_validation.key domain_validation.key.backup
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**Service won't start:**
-
-- Check configuration file syntax
-- Verify file permissions
-- Review systemd logs
-
-**Network connectivity issues:**
-
-- Verify firewall rules
-- Check DNS resolution
-- Test P2P connectivity between nodes
-
-**Certificate issues:**
-
-- Verify domain validation key
-- Check ACME configuration
-- Ensure domain DNS is properly configured
-
-### Debugging Commands
-
-```bash
-# Check configuration syntax
-tau config validate --config /etc/tau/config.yaml
-
-# Test network connectivity
-tau tools p2p ping <peer-address>
-
-# Verify DNS configuration
-tau tools dns lookup enterprise.starships.ws
-
-# Check service discovery
-tau tools discovery list
-```
-
-This manual deployment process gives you full control and understanding of your Taubyte cloud infrastructure. For automated deployment, consider using [Spore Drive](spore-drive.md) for a simpler approach.
