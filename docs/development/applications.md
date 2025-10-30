@@ -28,7 +28,7 @@ Changes are currently only saved locally in your browser's virtual filesystem. C
 Enter a commit message, then click on Finish to push your changes.
 
 ![](/images/webconsole-new-app-push-done.png)
-> 💡 **Note**: You don't have to push immediately. You can keep working on your application and push when you're ready.
+> **Note**: You don't have to push immediately. You can keep working on your application and push when you're ready.
 
 ### Open your application
 To open your application, click on the application name in the list.
@@ -43,7 +43,7 @@ Within the application, you can define the same ressources you can define global
 Let's create a function in our application. In the function tab, click on the `+` button. Then select the `ping_pong` template, ake sure we're using generated domain, and use `/backend/ping` as the path.
 
 ![](/images/webconsole-new-app-new-func-modal.png)
-> 💡 **Note**: The path, here `/backend/ping`, does not have to include the application name. So feel free to use any path you'd like.
+> **Note**: The path, here `/backend/ping`, does not have to include the application name. So feel free to use any path you'd like.
 
 Switch to the code view and change the returned string then validate.
 
@@ -70,7 +70,7 @@ dream inject push-all
 
 Onc the build is done, click on the thunder icon to open the function's HTTP endpoint in a tab.
 ![](/images/webconsole-new-app-new-func-exec.png)
-> 💡 **Note**: If you experience any difficulty opening the endpoint make sure your generated domain is listed in your `/etc/hosts`(or equivalent) file.
+> **Note**: If you experience any difficulty opening the endpoint make sure your generated domain is listed in your `/etc/hosts`(or equivalent) file.
 
 The endpoint should return `BACKEND APP - PONG`.
 ![](/images/webconsole-new-app-new-func-exec-window.png)

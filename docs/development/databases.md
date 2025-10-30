@@ -11,7 +11,8 @@ First, navigate to Database in the side menu and click the + button.
 
 Name the database `example_kv_store`. As a matcher, use `/example/kv`. Set replication to `min=1, max=2`. Set the size to `100MB` and validate.
 ![](/images/webconsole-dreamland-create-new-database-modal.png)
->💡 **Note**: Just like storage, the matcher can be any string and even a regular expression. There's no restrictions on the matcher but I prefer to use a path like `/example/kv`.
+
+> **Note**: Just like storage, the matcher can be any string and even a regular expression. There's no restrictions on the matcher but I prefer to use a path like `/example/kv`.
 
 Now, you should see your new database in the list.
 ![](/images/webconsole-dreamland-create-new-database-done.png)
@@ -23,13 +24,15 @@ Changes are currently only saved locally in your browser's virtual filesystem. C
 
 Taubyte databasees are instantiated on the fly when you first use it. This is why you can use regular expressions as a matcher. For example, if we used /profile/history/[^/]+, opening /profile/history/userA would create a database just for that user.
 
-Let's create two functions that will use the database: one to store a key/value and another to get the value given a key. For detailed steps on how to create a function, see [Create a function](../03-first-function).
+Let's create two functions that will use the database: one to store a key/value and another to get the value given a key. For detailed steps on how to create a function, see [Create a function](../getting-started/first-function.md).
 
 #### Setting a Key
+
 Start with the upload function. Go to `Functions` and click on the `+` button. Create a new function named `kv_set`. Ensure it has enough memory; 10MB should be more than enough. Set the method to `POST`, use the generated domain, set the path to `/api/kv`, and set the entry point to `set`.
 ![](/images/webconsole-dreamland-create-new-database-set-func-modal.png)
 
 Switch to the code view and add the following code:
+
 ```go
 package lib
 
@@ -87,19 +90,21 @@ func set(e event.Event) uint32 {
 ```
 
 Validate the new function, push the changes then go back to your terminal in order to trigger build:
+
 ```bash
 dream inject push-all
 ```
 
 Once the build is done, you can test the function by sending a POST request to the endpoint:
+
 ```bash
 curl -X POST http://evy8manx0.blackhole.localtau:11005/api/kv -H "Content-Type: application/json" -d '{
   "key": "message",
   "value": "hello world!"
 }'
 ```
-> 💡 **Note**: Replace `evy8manx0.blackhole.localtau` with your own domain and 11005 with your own port.
 
+> **Note**: Replace `evy8manx0.blackhole.localtau` with your own domain and 11005 with your own port.
 
 Unless the curl fails, we now have a key `message` that contains `hello world!` in our database.
 
@@ -107,13 +112,14 @@ Unless the curl fails, we now have a key `message` that contains `hello world!` 
 
 Let's create a function to get the value given a key. To save time, you can use the clone icon to clone the `kv_set` function.
 
-![](/images/webconsole-dreamland-create-new-database-get-func-clone.png)	
+![](/images/webconsole-dreamland-create-new-database-get-func-clone.png)
 
 Edit the freshly cloned function, name it `kv_get`, set the method to `GET`, and set the entry point to `get`.
 
 ![](/images/webconsole-dreamland-create-new-database-get-func-edit.png)
 
 Switch to the code view and add the following code:
+
 ```go
 package lib
 
@@ -160,16 +166,19 @@ func get(e event.Event) uint32 {
 ```
 
 Same as for the previous function: validate, push then trigger build:
+
 ```bash
 dream inject push-all
 ```
 
 Wait for the build to finish, then test the function by sending a GET request to the endpoint:
+
 ```bash
 curl http://evy8manx0.blackhole.localtau:11005/api/kv?key=message
 ```
 
 Output:
+
 ```
 hello world!
 ```

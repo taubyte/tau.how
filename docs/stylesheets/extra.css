@@ -30,3 +30,12 @@
   height: 32px;
   width: auto;
 }
+
+/* Accent color override (adjust hex to match Taubyte green exactly) */
+:root {
+  --md-accent-fg-color: #00c853; /* Taubyte green (placeholder) */
+}
+
+[data-md-color-scheme="slate"] {
+  --md-accent-fg-color: #00c853;
+}

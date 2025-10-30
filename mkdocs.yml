@@ -1,7 +1,7 @@
 site_name: Taubyte Documentation
-site_description: Taubyte - Open-source Serverless Operating System
+site_description: Build cloud apps the Git-native way with Taubyte's serverless platform
 site_author: Taubyte Team
-site_url: https://docs.taubyte.com
+site_url: https://tau.how
 
 # Repository - shows in navbar with stars/forks
 repo_name: taubyte/tau
@@ -52,7 +52,7 @@ theme:
     # Default dark theme
     - scheme: slate
       primary: black
-      accent: blue grey
+      accent: green
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -60,7 +60,7 @@ theme:
     # Light theme option
     - scheme: default
       primary: blue grey
-      accent: blue grey
+      accent: green
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -102,8 +102,6 @@ extra:
       link: https://discord.gg/KbN3KN7kpQ
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/taubyte
-    - icon: fontawesome/brands/instagram
-      link: https://instagram.com/taubyte
 
   version:
     provider: mike
@@ -187,7 +185,6 @@ nav:
   - Home: index.md
 
   - Getting Started:
-      - getting-started/index.md
       - Introduction: getting-started/introduction.md
       - Installation: getting-started/installation.md
       - Local Cloud: getting-started/local-cloud.md
@@ -220,7 +217,6 @@ nav:
 
   - Tools:
       - tools/dream.md
-      - tools/web-console.md
 
 # Extra CSS
 extra_css:

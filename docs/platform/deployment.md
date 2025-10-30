@@ -8,7 +8,7 @@ Every Taubyte-based Cloud is associated with a Fully Qualified Domain Name (FQDN
 
 Developers often require a temporary sub-domain for testing. You can use a sub-domain of your main domain or a different one. While `g.enterprise.starships.ws` or `el.starships.ws` are valid, my passion for Sci-Fi inspires me to select `e.ftll.ink` (Enterprise's Faster Than Light Link).
 
-> 💡 **Note**: The domain can be local, but it must resolve on the hosts where `tau` is installed.
+> **Note**: The domain can be local, but it must resolve on the hosts where `tau` is installed.
 
 ## Infrastructure Setup
 
@@ -22,7 +22,7 @@ For this example, I provisioned 3 VMs:
 | host-002-enterprise-starships-ws | Toronto      | 34.130.131.76  |
 | host-003-enterprise-starships-ws | Los Angeles  | 35.235.122.141 |
 
-> 💡 **Note**: This setup is temporary and will be decommissioned eventually. It remains accessible for testing while operational.
+> **Note**: This setup is temporary and will be decommissioned eventually. It remains accessible for testing while operational.
 
 ## Firewall Configuration
 
@@ -45,7 +45,7 @@ sudo apt update
 sudo apt install curl vim
 ```
 
-> 💡 **Tip**: If you're unfamiliar with `vim`, try [vim-adventures](https://vim-adventures.com/) for a fun introduction.
+> **Tip**: If you're unfamiliar with `vim`, try [vim-adventures](https://vim-adventures.com/) for a fun introduction.
 
 ### Freeing Up DNS Ports
 
@@ -89,7 +89,7 @@ Install `tau`:
 curl https://get.tau.link/tau | sh
 ```
 
-> 💡 **Note**: A single host can support multiple nodes if ports do not overlap. For this guide, we use a one-node-per-host configuration.
+> **Note**: A single host can support multiple nodes if ports do not overlap. For this guide, we use a one-node-per-host configuration.
 
 Upon successful installation, you should see:
 
@@ -121,7 +121,7 @@ Here's a quick rundown of the options used:
 - `--dv` generates a domain validation key pair.
 - `--swarm` creates a swarm key for network clustering.
 
-> 💡 **Note**: Enabling all protocols on a single node is not advisable in deployments with meaninful workloads. You should be mindful of not having services like `substrate` or `monkey` eating up all the resources.
+> **Note**: Enabling all protocols on a single node is not advisable in deployments with meaninful workloads. You should be mindful of not having services like `substrate` or `monkey` eating up all the resources.
 
 Upon successful configuration, you'll receive the node's ID:
 
@@ -176,7 +176,7 @@ domains:
 plugins: {}
 ```
 
-> 💡 **Tip**: Correct the location manually if inaccurately determined.
+> **Tip**: Correct the location manually if inaccurately determined.
 
 Validate the configuration:
 
@@ -303,9 +303,9 @@ Use a tool like slimdig to verify the DNS configuration:
 
 ![](/images/slimdig-tau-entry-enterprise-starships-ws.png)
 
-> 💡 **Note**: DNS propagation can delay effectiveness, requiring multiple attempts over several minutes.
+> **Note**: DNS propagation can delay effectiveness, requiring multiple attempts over several minutes.
 
-Congratulations, your cloud is operational! If you'd like to try it out right away, check out [Take it for a spin!](../12-try-the-cloud).
+Congratulations, your cloud is operational! You can now deploy your applications and start using your Taubyte-based cloud.
 
 ## Adding the Other Nodes
 

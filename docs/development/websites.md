@@ -15,7 +15,7 @@ Input a website name. Ensure the repository is set to `generate`. Toggle `privat
 
 Select the HTML template, and click `Generate`.
 ![](/images/webconsole-dreamland-create-new-website-template.png)
-> 💡 **Note**: This will create a new repository on Github and push the generated code to it.
+> **Note**: This will create a new repository on Github and push the generated code to it.
 
 Notice that now you have a new website in the list.
 ![](/images/webconsole-dreamland-create-new-website-template-done.png)
@@ -59,7 +59,7 @@ dream inject push-specific \
 --fn taubyte0/tb_website_tau_how_new_website
 ```
 
-> 💡 **Note**: Use the `github.id` for `--rid` and `github.fullname` for `--fn` you copied earlier.
+> **Note**: Use the `github.id` for `--rid` and `github.fullname` for `--fn` you copied earlier.
 
 Navigate to the builds page and wait for the build to complete.
 
@@ -67,7 +67,7 @@ Navigate to the builds page and wait for the build to complete.
 
 ### Opening the Website
 
-First, if not done already while creating a function (see [Creating a function](../03-first-function)), add the generated domain to your hosts file. On Unix-like systems (Linux/macOS), edit `/etc/hosts`:
+First, if not done already while creating a function (see [Creating a function](../getting-started/first-function.md)), add the generated domain to your hosts file. On Unix-like systems (Linux/macOS), edit `/etc/hosts`:
 
 ```sh
 sudo vi /etc/hosts
@@ -79,7 +79,7 @@ For me, the generated domain is `gftxhd6h0.blackhole.localtau`. So I add:
 127.0.0.1 gftxhd6h0.blackhole.localtau
 ```
 
-Then navigate to the `Websites` page and click on the thunder ⚡️ to open the website in a new tab.
+Then navigate to the `Websites` page and click on the thunder to open the website in a new tab.
 
 ![](/images/webconsole-dreamland-create-new-website-build-open-btn.png)
 

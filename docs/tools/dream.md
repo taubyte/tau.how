@@ -28,14 +28,6 @@ Starting a local cloud environment is as easy as running:
 dream new multiverse
 ```
 
-## Check Status
-
-You can verify everything is running with:
-
-```bash
-dream status universe
-```
-
 If you'd like to play around with dream, [Start a local Cloud](../getting-started/local-cloud.md) is a good place to start.
 
 For more information about using dream as a library for E2E testing, see the [dream repository](https://github.com/taubyte/tau/tree/main/dream).

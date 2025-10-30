@@ -99,13 +99,13 @@ Next, get the url for `room="tau"`:
 ```bash
 curl http://evy8manx0.blackhole.localtau:11005/api/ws?room=tau
 ```
-> 💡 **Note**: Replace `evy8manx0.blackhole.localtau` with your own domain and 11005 with your own port.
+> **Note**: Replace `evy8manx0.blackhole.localtau` with your own domain and 11005 with your own port.
 
 Output:
 ```
 ws-QmbaJ2gJCmjNLoGNSRk2F5WbpW1b45bxLCQWVcn8Butfa3/chat-4580c2740ab6d9222ef06d7c6865583e
 ```
-> 💡 **Note**: The url will be different for you.
+> **Note**: The url will be different for you.
 Then on two separate terminals, run:
 ```bash
 wscat -c ws://evy8manx0.blackhole.localtau:11005/ws-QmbaJ2gJCmjNLoGNSRk2F5WbpW1b45bxLCQWVcn8Butfa3/chat-4580c2740ab6d9222ef06d7c6865583e

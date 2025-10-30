@@ -96,7 +96,3 @@ The other nodes, referred to as Simples (admittedly, not the best name), include
 - `client` nodes are lightweight and can be used to test services or peer-to-peer services deployed on the cloud
 
 > **Note**: In production, nodes can run multiple services by defining a "shape". The single-service-per-node setup in dream is purely for development convenience.
-
-## Next Steps
-
-Now that your local cloud is running, continue to [First Function](first-function.md) to create and deploy your first serverless function.

@@ -12,7 +12,7 @@ First, navigate to `Storage` in the side menu and click the `+` button.
 Name the storage `simple_storage`. As a matcher, use `/simple/storage`. Ensure the type is set to `Object Bucket` and the size to `1GB`.
 
 ![](/images/webconsole-dreamland-create-new-storage-modal.png)
->💡 **Note**: The matcher can be any string and even a regular expression. I prefer to use a path like `/simple/storage` to make it easier to identify the storage.
+> **Note**: The matcher can be any string and even a regular expression. I prefer to use a path like `/simple/storage` to make it easier to identify the storage.
 
 Validate to create the storage configuration.
 
@@ -30,7 +30,7 @@ Remember, this configuration only exists in the local copy of the repository sto
 
 Unlike S3 storage, Taubyte storage is instantiated on the fly when you first use it. This is why you can use regular expressions as a matcher. For example, if we used `/profile/storage/[^/]+`, opening `/profile/storage/userA` would create a bucket just for that user. Most importantly, as of today, it's only accessible from your code. To access it through an HTTP endpoint, you'll need to create a function.
 
-Let's create two functions that will use the storage: one to upload a file and another to download a file. For detailed steps on how to create a function, see [Create a function](../03-first-function).
+Let's create two functions that will use the storage: one to upload a file and another to download a file. For detailed steps on how to create a function, see [Create a function](../getting-started/first-function.md).
 
 #### Upload a File
 

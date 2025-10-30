@@ -14,7 +14,7 @@ Navigate to the `Libraries` tab on the left sidebar. Then click on `+` to create
 Name the library then validate.
 ![](/images/webconsole-new-library-modal.png)
 
-> 💡 **Note**: If you'd like to import an existing library, click on `--Generate--` and select the library you'd like to import.
+> **Note**: If you'd like to import an existing library, click on `--Generate--` and select the library you'd like to import.
 
 At the time of writing, only one template is available, so click on `Generate` to create a repository and populate it with the templates code.
 ![](/images/webconsole-new-library-modal-template-select.png)
@@ -88,7 +88,7 @@ Ignore the changes on the code repository. Click on `Next`.
 
 ![](/images/webconsole-new-library-new-func-modal-push-2.png)
 
-> 💡 **Note**: Webconsole create some structure to facilitate an eventual switch to inline code.
+> **Note**: Webconsole create some structure to facilitate an eventual switch to inline code.
 
 Enter a commit message and click on `Finish`.
 
@@ -102,7 +102,7 @@ dream inject push-specific -u blackhole \
 -fn taubyte0/tb_library_tauhow_example_library
 ```
 
-> 💡 **Note**: use your own repository id and fullname. If you didn't save them you can Navigate to the library, click on it then switch to YAML to find them. Another way if to just open the config repository and find them in `libraries/tauhow_example_library.yaml`.
+> **Note**: use your own repository id and fullname. If you didn't save them you can Navigate to the library, click on it then switch to YAML to find them. Another way if to just open the config repository and find them in `libraries/tauhow_example_library.yaml`.
 
 Next, let's trigger a build for the configuration changes.
 
@@ -110,7 +110,7 @@ Next, let's trigger a build for the configuration changes.
 dream inject push-all
 ```
 
-Wait for the builds to finish. Then click on ⚡️ to open the function's endpoint in a new tab.
+Wait for the builds to finish. Then click on the thunder icon to open the function's endpoint in a new tab.
 
 ![](/images/webconsole-new-library-new-func-exec-btn.png)
 
@@ -205,7 +205,7 @@ func doAdd(e event.Event) uint32 {
 	return 0
 }
 ```
-> 💡 **Note**: `libraries/<library name>` is resolved within the context of the application the function is part of, then globaly. In this case the function is global so the library is only resolved globaly.
+> **Note**: `libraries/<library name>` is resolved within the context of the application the function is part of, then globaly. In this case the function is global so the library is only resolved globaly.
 
 Push the changes.
 

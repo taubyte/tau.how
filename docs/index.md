@@ -1,10 +1,12 @@
-# Taubyte — Build Cloud Apps the Git‑Native Way
+# Full‑stack Workspace for Humans and Machines
 
-Taubyte is an open-source Serverless Operating System: git-native, code-first, secure, and built for speed. Spin up a production‑parity cloud locally, ship with CI/CD by default, and scale globally with a P2P backbone and WebAssembly.
+Full‑stack workspace that lets teams and coding agents build, test, and ship apps on autopilot—on their own infrastructure.
 
-> Placeholder hero image will go here (see "Hero image" prompt below)
+> **Image**: Abstract workspace showing developer alongside AI agent collaborating on cloud infrastructure. Clean, modern, professional.
 
 ### Getting Started
+
+> **Image**: Simple onboarding flow showing developer workflow from local development to deployment.
 
 - [How Taubyte Works →](getting-started/introduction.md)
 - [Install Tools →](getting-started/installation.md)
@@ -16,6 +18,8 @@ Taubyte is an open-source Serverless Operating System: git-native, code-first, s
 With a single CLI, you can create a full local cloud that mirrors production: same services, same routing, same deployment flow. Git branches map to environments, and CI/CD turns merges into deployments.
 
 ### Cloud Black Box, De‑mystified
+
+> **Image**: Layered architecture diagram showing Git, P2P, and WebAssembly components working together.
 
 Under the hood: a P2P fabric for discovery and routing, WebAssembly for secure multi‑tenant execution, and Git as the source of truth for infra and app config. Learn the concepts that matter:
 
@@ -63,25 +67,14 @@ What you get:
 - Built-in CI/CD
 - Global‑ready architecture
 
-### Future Content Ideas
-
-- Real‑world solution blueprints (auth, billing, analytics)
-- Observability deep‑dive (tracing, metrics, logs)
-- Multi‑region deployments and traffic policies
-- Patterns for event‑driven architectures
-
 ### Breaking Down the Jargon
 
 New to serverless, P2P, or WASM? Start with the concepts and return here when you need specifics:
 
 - [Core Concepts](fundamentals/concepts.md)
 
-### Powered by Material for MkDocs
+### Let's Connect
 
-This documentation is built with MkDocs Material, optimized for speed, readability, and easy maintenance.
-
-### Let's Connect!
-
-- Discord: https://discord.gg/KbN3KN7kpQ
-- GitHub: https://github.com/taubyte/tau
-- Twitter: https://twitter.com/taubyte
+- **GitHub**: [taubyte/tau](https://github.com/taubyte/tau)
+- **Discord**: [Join our community](https://discord.gg/KbN3KN7kpQ)
+- **Twitter**: [@taubyte](https://twitter.com/taubyte)

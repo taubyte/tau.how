@@ -235,7 +235,7 @@ If you've added the generated domain to your `/etc/hosts`, you can also test the
 
 1. In the sidebar, click on `Functions`
 2. Find your `ping` function in the list
-3. Click the thunder ⚡️ icon next to it to execute
+3. Click the thunder icon next to it to execute
 
 This will open a new tab and make a request to your function's endpoint.
 
