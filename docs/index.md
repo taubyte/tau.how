@@ -2,11 +2,11 @@
 
 Full‑stack workspace that lets teams and coding agents build, test, and ship apps on autopilot—on their own infrastructure.
 
-> **Image**: Abstract workspace showing developer alongside AI agent collaborating on cloud infrastructure. Clean, modern, professional.
+<!-- Hero image: Abstract workspace showing developer alongside AI agent collaborating on cloud infrastructure. Clean, modern, professional. -->
 
 ### Getting Started
 
-> **Image**: Simple onboarding flow showing developer workflow from local development to deployment.
+<!-- Image: Simple onboarding flow showing developer workflow from local development to deployment. -->
 
 - [How Taubyte Works →](getting-started/introduction.md)
 - [Install Tools →](getting-started/installation.md)
@@ -19,7 +19,7 @@ With a single CLI, you can create a full local cloud that mirrors production: sa
 
 ### Cloud Black Box, De‑mystified
 
-> **Image**: Layered architecture diagram showing Git, P2P, and WebAssembly components working together.
+<!-- Image: Layered architecture diagram showing Git, P2P, and WebAssembly components working together. -->
 
 Under the hood: a P2P fabric for discovery and routing, WebAssembly for secure multi‑tenant execution, and Git as the source of truth for infra and app config. Learn the concepts that matter:
 
