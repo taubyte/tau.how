@@ -4,6 +4,26 @@ Full‑stack workspace that lets teams and coding agents build, test, and ship a
 
 <!-- Hero image: Abstract workspace showing developer alongside AI agent collaborating on cloud infrastructure. Clean, modern, professional. -->
 
+<div class="tb-carousel" data-carousel>
+  <div class="tb-carousel__viewport">
+    <div class="tb-carousel__slide is-active">
+      <img src="assets/your-cloud-desktop.png" alt="Your Cloud desktop overview" loading="eager"/>
+    </div>
+    <div class="tb-carousel__slide">
+      <img src="assets/test-desktop.png" alt="Test desktop with pipelines and checks" loading="lazy"/>
+    </div>
+    <div class="tb-carousel__slide">
+      <img src="assets/ship-desktop.png" alt="Ship desktop showing deployments" loading="lazy"/>
+    </div>
+    <div class="tb-carousel__slide">
+      <img src="assets/build-desktop.png" alt="Build desktop with build history" loading="lazy"/>
+    </div>
+  </div>
+  <button class="tb-carousel__control tb-carousel__control--prev" aria-label="Previous slide" data-carousel-prev>‹</button>
+  <button class="tb-carousel__control tb-carousel__control--next" aria-label="Next slide" data-carousel-next>›</button>
+  <div class="tb-carousel__dots" data-carousel-dots></div>
+</div>
+
 ### Getting Started
 
 <!-- Image: Simple onboarding flow showing developer workflow from local development to deployment. -->

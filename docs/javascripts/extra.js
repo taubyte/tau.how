@@ -30,6 +30,67 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Add any custom event listeners or functionality here
+
+  // --- Simple Carousel ---
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const slides = Array.from(
+      carousel.querySelectorAll('.tb-carousel__slide')
+    );
+    const prevBtn = carousel.querySelector('[data-carousel-prev]');
+    const nextBtn = carousel.querySelector('[data-carousel-next]');
+    const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+
+    if (slides.length === 0) return;
+
+    let active = Math.max(
+      0,
+      slides.findIndex((s) => s.classList.contains('is-active'))
+    );
+
+    // Build dots
+    const dots = slides.map((_, idx) => {
+      const dot = document.createElement('button');
+      dot.className = 'tb-carousel__dot' + (idx === active ? ' is-active' : '');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+      dot.addEventListener('click', () => goTo(idx));
+      dotsContainer.appendChild(dot);
+      return dot;
+    });
+
+    function goTo(index) {
+      slides[active].classList.remove('is-active');
+      dots[active].classList.remove('is-active');
+      active = (index + slides.length) % slides.length;
+      slides[active].classList.add('is-active');
+      dots[active].classList.add('is-active');
+    }
+
+    function next() { goTo(active + 1); }
+    function prev() { goTo(active - 1); }
+
+    nextBtn && nextBtn.addEventListener('click', next);
+    prevBtn && prevBtn.addEventListener('click', prev);
+
+    // Autoplay
+    let timer = setInterval(next, 5000);
+    carousel.addEventListener('mouseenter', () => clearInterval(timer));
+    carousel.addEventListener('mouseleave', () => {
+      timer = setInterval(next, 5000);
+    });
+
+    // Basic swipe support
+    let startX = 0;
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) {
+        dx < 0 ? next() : prev();
+      }
+    });
+  });
 });
 
 // Custom functions for documentation features
