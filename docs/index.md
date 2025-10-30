@@ -6,9 +6,6 @@ Full‑stack workspace that lets teams and coding agents build, test, and ship a
 
 <div class="tb-carousel" data-carousel>
   <div class="tb-carousel__viewport">
-    <div class="tb-carousel__slide is-active">
-      <img src="assets/your-cloud-desktop.png" alt="Your Cloud desktop overview" loading="eager"/>
-    </div>
     <div class="tb-carousel__slide">
       <img src="assets/test-desktop.png" alt="Test desktop with pipelines and checks" loading="lazy"/>
     </div>
@@ -17,6 +14,9 @@ Full‑stack workspace that lets teams and coding agents build, test, and ship a
     </div>
     <div class="tb-carousel__slide">
       <img src="assets/build-desktop.png" alt="Build desktop with build history" loading="lazy"/>
+    </div>
+    <div class="tb-carousel__slide is-active">
+      <img src="assets/your-cloud-desktop.png" alt="Your Cloud desktop overview" loading="eager"/>
     </div>
   </div>
   <button class="tb-carousel__control tb-carousel__control--prev" aria-label="Previous slide" data-carousel-prev>‹</button>
