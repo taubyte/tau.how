@@ -7,24 +7,24 @@ At this point, you've created a function and a website. Let's make things intere
 
 First, navigate to `Storage` in the side menu and click the `+` button.
 
-![](/images/webconsole-dreamland-create-new-storage.png)
+![](../images/webconsole-dreamland-create-new-storage.png)
 
 Name the storage `simple_storage`. As a matcher, use `/simple/storage`. Ensure the type is set to `Object Bucket` and the size to `1GB`.
 
-![](/images/webconsole-dreamland-create-new-storage-modal.png)
+![](../images/webconsole-dreamland-create-new-storage-modal.png)
 > **Note**: The matcher can be any string and even a regular expression. I prefer to use a path like `/simple/storage` to make it easier to identify the storage.
 
 Validate to create the storage configuration.
 
-![](/images/webconsole-dreamland-create-new-storage-modal-done.png)
+![](../images/webconsole-dreamland-create-new-storage-modal-done.png)
 
 Now, you should see your new storage in the list.
 
-![](/images/webconsole-dreamland-create-new-storage-modal-listed.png)
+![](../images/webconsole-dreamland-create-new-storage-modal-listed.png)
 
 Remember, this configuration only exists in the local copy of the repository stored in the browser's virtual file system. To push the changes to the remote repository, click on the push button at the bottom right corner. Review the changes, add a commit message, and click on `Push`.
 
-![](/images/webconsole-dreamland-create-new-storage-push-modal-2.png)
+![](../images/webconsole-dreamland-create-new-storage-push-modal-2.png)
 
 ### Use the Storage
 
@@ -36,7 +36,7 @@ Let's create two functions that will use the storage: one to upload a file and a
 
 Start with the upload function. Go to `Functions` and click on the `+` button. Create a new function named `store_file`. Ensure it has enough memory for your files; here, we're going for 100MB. Set the method to `POST`, use the generated domain, set the path to `/api/store`, and set the entry point to `store`.
 
-![](/images/webconsole-dreamland-create-new-storage-upload-func.png)
+![](../images/webconsole-dreamland-create-new-storage-upload-func.png)
 
 Switch to the code view and add the following code:
 
@@ -120,11 +120,11 @@ Unless the curl fails, we now have an object `example.txt` that contains `This i
 
 Now, let's create a function to download the file we just uploaded. To save time, you can use the clone icon to clone the `store_file` function.
 
-![](/images/webconsole-dreamland-create-new-storage-download-func-clone.png)
+![](../images/webconsole-dreamland-create-new-storage-download-func-clone.png)
 
 Edit the freshly cloned function, name it `get_file`, set the method to `GET`, and set the entry point to `get`.
 
-![](/images/webconsole-dreamland-create-new-storage-download-func-edit.png)
+![](../images/webconsole-dreamland-create-new-storage-download-func-edit.png)
 
 Switch to the code view and add the following code:
 

@@ -10,22 +10,22 @@ You can import a project using either the Web console or tau-cli. The Web consol
 
 If you're currently connected to dream, start by logging out:
 
-![](/images/webconsole-logout-of-dream.png)
+![](../images/webconsole-logout-of-dream.png)
 
 Navigate to https://console.taubyte.com and select "Custom":
-![](/images/webconsole-login-select-custom.png)
+![](../images/webconsole-login-select-custom.png)
 
 Enter your cloud's FQDN, validate, then login as usual:
-![](/images/webconsole-login-select-custom-enter-fqdn.png)
+![](../images/webconsole-login-select-custom-enter-fqdn.png)
 
 Click on "Import Project":
-![](/images/webconsole-import-project.png)
+![](../images/webconsole-import-project.png)
 
 Select the repository you want to import. The Web console will attempt to identify eligible repositories and will even match the code repo if you select the config repo. If you don't see your repositories, you can enter them manually:
-![](/images/webconsole-import-project-modal.png)
+![](../images/webconsole-import-project-modal.png)
 
 Your project will now appear in the project list. Click on it to load it:
-![](/images/webconsole-import-project-done.png)
+![](../images/webconsole-import-project-done.png)
 
 #### Trigger builds
 You'll need to trigger builds for each repository. Here's how to handle different scenarios:

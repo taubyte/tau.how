@@ -6,26 +6,26 @@ Messaging (or Pubsub) is an important part of any distributed architecture. If y
 
 Navigate to `Messaging` in the side menu and click the `+` button.
 
-![](/images/webconsole-dreamland-create-new-messaging.png)
+![](../images/webconsole-dreamland-create-new-messaging.png)
 
 Name it `ws_chan`. Set the topic matcher to `/ws/chan`. And toggle `Websocket`. Then validate.
 
-![](/images/webconsole-dreamland-create-new-messaging-modal.png)
+![](../images/webconsole-dreamland-create-new-messaging-modal.png)
 
 Once done, you should see your new it in the list.
 
-![](/images/webconsole-dreamland-create-new-messaging-done.png)
+![](../images/webconsole-dreamland-create-new-messaging-done.png)
 
 To apply these changes to your project, click the green push button in the bottom right corner. You'll be able to review the changes, write a commit message, and push them to the repository.
-![](/images/webconsole-dreamland-create-new-messaging-push-done.png)
+![](../images/webconsole-dreamland-create-new-messaging-push-done.png)
 
 ### Messaging in action
 Go to `Functions` and click on the `+` button. Then click on the `Template Select` button. Select `Go` and `get_websocket_url`.
 
-![](/images/webconsole-dreamland-create-new-messaging-ws-func-template-select.png)
+![](../images/webconsole-dreamland-create-new-messaging-ws-func-template-select.png)
 
 Make sure domain is set to GeneratedDomain and add `/api/ws` to the path.
-![](/images/webconsole-dreamland-create-new-messaging-ws-func-edit-modal.png)
+![](../images/webconsole-dreamland-create-new-messaging-ws-func-edit-modal.png)
 
 You can use the template code and just replace the topic. However we're going to use a query variable to create a unique channel for each room. Switch to the code view and replace the code with:
 ```go
@@ -84,7 +84,7 @@ func getsocketurl(e event.Event) uint32 {
 ```
 
 Validate the new function then push the changes.
-![](/images/webconsole-dreamland-create-new-messaging-ws-func-push.png)
+![](../images/webconsole-dreamland-create-new-messaging-ws-func-push.png)
 Head back to your terminal and trigger build:
 ```bash
 dream inject push-all
@@ -112,5 +112,5 @@ wscat -c ws://evy8manx0.blackhole.localtau:11005/ws-QmbaJ2gJCmjNLoGNSRk2F5WbpW1b
 ```
 
 This is what you should see:
-![](/images/webconsole-dreamland-create-new-messaging-wscat-example.png)
+![](../images/webconsole-dreamland-create-new-messaging-wscat-example.png)
 

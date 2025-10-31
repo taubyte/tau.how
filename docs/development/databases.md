@@ -7,18 +7,18 @@ You've already set up your first project, created a serverless function, and lau
 ### Creating the Database
 
 First, navigate to Database in the side menu and click the + button.
-![](/images/webconsole-dreamland-create-new-database.png)
+![](../images/webconsole-dreamland-create-new-database.png)
 
 Name the database `example_kv_store`. As a matcher, use `/example/kv`. Set replication to `min=1, max=2`. Set the size to `100MB` and validate.
-![](/images/webconsole-dreamland-create-new-database-modal.png)
+![](../images/webconsole-dreamland-create-new-database-modal.png)
 
 > **Note**: Just like storage, the matcher can be any string and even a regular expression. There's no restrictions on the matcher but I prefer to use a path like `/example/kv`.
 
 Now, you should see your new database in the list.
-![](/images/webconsole-dreamland-create-new-database-done.png)
+![](../images/webconsole-dreamland-create-new-database-done.png)
 
 Changes are currently only saved locally in your browser's virtual filesystem. Click on the green button on the bottom right corner. Review the changes, add a commit message, and click on Push.
-![](/images/webconsole-dreamland-create-new-database-push-2.png)
+![](../images/webconsole-dreamland-create-new-database-push-2.png)
 
 ### Use the Database
 
@@ -29,7 +29,7 @@ Let's create two functions that will use the database: one to store a key/value 
 #### Setting a Key
 
 Start with the upload function. Go to `Functions` and click on the `+` button. Create a new function named `kv_set`. Ensure it has enough memory; 10MB should be more than enough. Set the method to `POST`, use the generated domain, set the path to `/api/kv`, and set the entry point to `set`.
-![](/images/webconsole-dreamland-create-new-database-set-func-modal.png)
+![](../images/webconsole-dreamland-create-new-database-set-func-modal.png)
 
 Switch to the code view and add the following code:
 
@@ -112,11 +112,11 @@ Unless the curl fails, we now have a key `message` that contains `hello world!` 
 
 Let's create a function to get the value given a key. To save time, you can use the clone icon to clone the `kv_set` function.
 
-![](/images/webconsole-dreamland-create-new-database-get-func-clone.png)
+![](../images/webconsole-dreamland-create-new-database-get-func-clone.png)
 
 Edit the freshly cloned function, name it `kv_get`, set the method to `GET`, and set the entry point to `get`.
 
-![](/images/webconsole-dreamland-create-new-database-get-func-edit.png)
+![](../images/webconsole-dreamland-create-new-database-get-func-edit.png)
 
 Switch to the code view and add the following code:
 
@@ -184,6 +184,6 @@ hello world!
 ```
 
 On chrome, you can also see the performance of the function:
-![](/images/webconsole-dreamland-create-new-database-get-func-perf.png)
+![](../images/webconsole-dreamland-create-new-database-get-func-perf.png)
 
 Congratulations! You've now created and used a database in your application.

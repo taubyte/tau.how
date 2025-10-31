@@ -34,7 +34,7 @@ While this guide uses TypeScript, Spore Drive is designed to be language-agnosti
 
 Spore drive is an RPC service that runs on your local machine. Unless used from browser, your SDK will start it for you.
 
-![](/images/spore-drive-overview-dia.png)
+![](../images/spore-drive-overview-dia.png)
 
 When your create a new configuration, spore-drive will create an instance of it either fully in memory if you don't provide a path or an in memory COW (Copy On Write) backed by a the file system. That allows multiple clients to manipulate the same configuration without having to worry about consistency. Only when you commit configuration changes, spore-drive will write the changes to the file system.
 

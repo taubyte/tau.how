@@ -196,7 +196,7 @@ sudo tau start -s compute
 
 Verify the node is active by navigating to [slimdig.com](https://slimdig.com) and performing a check with `seer.tau.<your domain>`, your server's public IP, and clicking the `A` button.
 
-![](/images/slimdig-seer-tau-ent-starships-ws.png)
+![](../images/slimdig-seer-tau-ent-starships-ws.png)
 
 Seeing your server's IP address verifies the node is operational.
 
@@ -282,7 +282,7 @@ Add the Node as an A Record:
    - Enter the node's IP address.
    - Validate the entry.
 
-   ![](/images/add-a-seer-entry-node-1-enterprise-starships-ws.png)
+   ![](../images/add-a-seer-entry-node-1-enterprise-starships-ws.png)
 
 Delegate with an NS Record:
 
@@ -291,7 +291,7 @@ Delegate with an NS Record:
    - Set its value to `seer.<domain>`.
    - Validate the entry.
 
-   ![](/images/add-ns-entry-enterprise-starships-ws.png)
+   ![](../images/add-ns-entry-enterprise-starships-ws.png)
 
 ### Verifying the Configuration
 
@@ -301,7 +301,7 @@ Use a tool like slimdig to verify the DNS configuration:
 - Set the query to a public DNS server like 8.8.8.8.
 - Click the `A` button to perform the lookup.
 
-![](/images/slimdig-tau-entry-enterprise-starships-ws.png)
+![](../images/slimdig-tau-entry-enterprise-starships-ws.png)
 
 > **Note**: DNS propagation can delay effectiveness, requiring multiple attempts over several minutes.
 
@@ -422,7 +422,7 @@ Ensure all nodes are registered and operational using DNS queries:
 
 1. Enter `<protocol>.tau.<domain>` and select `A` to perform the query.
 
-![](/images/slimdig-all-three-nodes-running-enterprise-starships-ws.png)
+![](../images/slimdig-all-three-nodes-running-enterprise-starships-ws.png)
 
 All three servers should be listed, indicating successful integration.
 
@@ -432,15 +432,15 @@ All three servers should be listed, indicating successful integration.
 
 **Main Domain:** Add `A` records for each new host.
 
-![](/images/add-for-all-a-seer-tau-entry-enterprise-starships-ws.png)
+![](../images/add-for-all-a-seer-tau-entry-enterprise-starships-ws.png)
 
 A DNS lookup should reflect all active hosts:
 
-![](/images/slimdig-all-seer-tau-ent-starships-ws.png)
+![](../images/slimdig-all-seer-tau-ent-starships-ws.png)
 
 **Generated Domain:** Delegate the subdomain to your cloud by adding an `NS` entry.
 
-![](/images/add-ns-entry-s-ftll-ink.png)
+![](../images/add-ns-entry-s-ftll-ink.png)
 
 ### Bootstrapping for Recovery and Expansion
 

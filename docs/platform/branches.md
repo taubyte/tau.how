@@ -29,15 +29,15 @@ This is because the branch `dev` does not exist on the remote repository.
 
 Let's fix that. On the top right corner, click on the current branch name, should be 'main', then click on `+`.
 
-![](/images/webconsole-create-new-branch.png)
+![](../images/webconsole-create-new-branch.png)
 
 Type `dev` as branch name then validate.
 
-![](/images/webconsole-create-new-branch-modal.png)
+![](../images/webconsole-create-new-branch-modal.png)
 
 The console will refresh and you'll see the branch name changed to `dev`.
 
-![](/images/webconsole-create-branch-set-to-dev.png)
+![](../images/webconsole-create-branch-set-to-dev.png)
 
 Now if you try to trigger a build again, it should succeed.
 ```bash
