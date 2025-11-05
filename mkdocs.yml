@@ -101,7 +101,7 @@ extra:
     - icon: fontawesome/brands/discord
       link: https://discord.gg/KbN3KN7kpQ
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/taubyte
+      link: https://twitter.com/dtaubyte
 
   version:
     provider: mike
