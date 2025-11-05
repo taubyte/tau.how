@@ -29,6 +29,31 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
+  // Handle Material for MkDocs view source links to point to tau.how
+  const materialViewLink = document.querySelector(".md-source__fact--view a");
+  if (
+    materialViewLink &&
+    materialViewLink.href.includes("github.com/taubyte/tau")
+  ) {
+    // Replace tau with tau.how and change /raw/ to /blob/ for proper viewing
+    materialViewLink.href = materialViewLink.href
+      .replace("taubyte/tau", "taubyte/tau.how")
+      .replace("/raw/", "/blob/");
+  }
+
+  // Also handle view buttons with title attributes and /raw/ URLs
+  const viewButtons = document.querySelectorAll(
+    "a[title*='View'], a[title*='view']"
+  );
+  viewButtons.forEach((button) => {
+    if (button.href && button.href.includes("github.com/taubyte/tau")) {
+      // Replace tau with tau.how and change /raw/ to /blob/ for proper viewing
+      button.href = button.href
+        .replace("taubyte/tau", "taubyte/tau.how")
+        .replace("/raw/", "/blob/");
+    }
+  });
+
   // Add any custom event listeners or functionality here
 
   // --- Simple Carousel ---
