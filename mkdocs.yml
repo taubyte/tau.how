@@ -12,11 +12,6 @@ edit_uri: edit/main/docs/
 theme:
   name: material
 
-  # Google Analytics
-  analytics:
-    provider: google
-    property: G-DNTEPF6LZH
-
   # Static files
   logo: assets/logo-w.svg
   favicon: assets/logo-w.svg

@@ -1,5 +1,11 @@
 // Extra JavaScript for Taubyte Documentation
 
+// Google tag (gtag.js) initialization
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DNTEPF6LZH');
+
 // Initialize any custom functionality
 document.addEventListener("DOMContentLoaded", function () {
   // Add copy button functionality (if not already provided by theme)
@@ -162,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Custom functions for documentation features
+// Custom functions for documentation
 window.taubyteDocs = {
   // Utility functions for documentation
   highlightCode: function (element) {
@@ -170,6 +176,42 @@ window.taubyteDocs = {
   },
 
   trackAnalytics: function (event, data) {
-    // Custom analytics tracking if needed
+    // Custom analytics tracking
+    if (typeof gtag !== "undefined") {
+      gtag("event", event, data || {});
+    } else {
+      console.warn("Google Analytics (gtag) is not available");
+    }
+  },
+
+  trackPageView: function (pageName, pageLocation) {
+    // Track custom page views
+    if (typeof gtag !== "undefined") {
+      gtag("event", "page_view", {
+        page_title: pageName || document.title,
+        page_location: pageLocation || window.location.href,
+      });
+    }
+  },
+
+  trackEvent: function (category, action, label, value) {
+    // Track custom events with category, action, label, and value
+    if (typeof gtag !== "undefined") {
+      gtag("event", action, {
+        event_category: category,
+        event_label: label,
+        value: value,
+      });
+    }
+  },
+
+  trackException: function (description, fatal) {
+    // Track exceptions and errors
+    if (typeof gtag !== "undefined") {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal || false,
+      });
+    }
   },
 };
