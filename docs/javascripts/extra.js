@@ -1,10 +1,38 @@
 // Extra JavaScript for Taubyte Documentation
 
-// Google tag (gtag.js) initialization
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-DNTEPF6LZH');
+// Google tag (gtag.js) loader + initialization
+(function () {
+  var GA_MEASUREMENT_ID = "G-DNTEPF6LZH";
+
+  // If gtag already exists, don't inject again
+  if (typeof window.gtag !== "undefined") {
+    try {
+      window.gtag("config", GA_MEASUREMENT_ID);
+    } catch (e) {
+      // noop
+    }
+    return;
+  }
+
+  // Inject the gtag.js script asynchronously and initialize on load
+  var s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+  s.onload = function () {
+    window.dataLayer = window.dataLayer || [];
+    function _gtag() {
+      window.dataLayer.push(arguments);
+    }
+    // expose gtag globally
+    window.gtag = window.gtag || _gtag;
+    window.gtag("js", new Date());
+    window.gtag("config", GA_MEASUREMENT_ID);
+  };
+  s.onerror = function () {
+    console.warn("Failed to load gtag.js");
+  };
+  document.head.appendChild(s);
+})();
 
 // Initialize any custom functionality
 document.addEventListener("DOMContentLoaded", function () {
