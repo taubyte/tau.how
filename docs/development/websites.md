@@ -101,7 +101,7 @@ By default, websites use generated domains under the `*.g.universe.localtau` pat
    - **Name**: Choose any name you want for this domain resource
    - **Description**: Add a description (optional)
    - **Tag**: Add tags for organization (optional)
-   - **FQDN**: Enter the fully qualified domain name you want to use (e.g., `example.com` or `scaliny.com`)
+   - **FQDN**: Enter the fully qualified domain name you want to use (e.g., `example.com`)
 
 3. Click `Save` to create the domain resource.
 
@@ -138,14 +138,12 @@ After pushing the domain configuration, wait for the build to complete:
 
 To complete the custom domain setup, you need to add DNS records at your domain name provider. Here's how to configure them:
 
-#### Example: Configuring scaliny.com
-
-For a domain like `scaliny.com`, add the following DNS records:
+For a custom domain like `example.com`, add the following DNS records:
 
 **1. CNAME Record:**
 - **Type**: `CNAME`
 - **Name/Host**: `substrate`
-- **Value/Target**: `tau.scaliny.com.`
+- **Value/Target**: `tau.example.com.` (replace `example.com` with your actual domain)
 - **TTL**: Use default or 3600
 
 **2. TXT Record:**
@@ -154,9 +152,9 @@ For a domain like `scaliny.com`, add the following DNS records:
 - **Value**: The JWT token value you copied from the domain details (the full token string)
 - **TTL**: Use default or 3600
 
-> **Note**: Make sure to include the trailing dot (`.`) after `tau.scaliny.com.` in the CNAME record value, as this indicates a fully qualified domain name.
+> **Note**: Make sure to include the trailing dot (`.`) after `tau.<your-domain>.` in the CNAME record value, as this indicates a fully qualified domain name.
 
-#### General Instructions
+#### General Pattern
 
 For any custom domain, follow this pattern:
 
