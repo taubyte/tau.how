@@ -88,3 +88,86 @@ Then navigate to the `Websites` page and click on the thunder to open the websit
 ![](../images/webconsole-dreamland-create-new-website-build-open-stats.png)
 
 Congratulations! You've successfully created a website!
+
+## Using Custom Domains
+
+By default, websites use generated domains under the `*.g.universe.localtau` pattern. However, you can configure your website to use your own custom domain (e.g., `example.com`) instead.
+
+### Adding a Custom Domain
+
+1. Navigate to the `Domains` section in the side menu and click the `+` button to add a new domain.
+
+2. Fill in the domain details:
+   - **Name**: Choose any name you want for this domain resource
+   - **Description**: Add a description (optional)
+   - **Tag**: Add tags for organization (optional)
+   - **FQDN**: Enter the fully qualified domain name you want to use (e.g., `example.com` or `scaliny.com`)
+
+3. Click `Save` to create the domain resource.
+
+### Pushing Domain Configuration to GitHub
+
+After creating the domain, you need to push the configuration changes to GitHub:
+
+1. Click on the push button at the bottom right corner of the screen.
+
+2. Review the configuration changes in the modal. You should see a new domain entry in the `domains` folder.
+
+3. Enter a commit message and click `Push` to commit and push the changes to GitHub.
+
+### Getting DNS Records
+
+After pushing the domain configuration, wait for the build to complete:
+
+1. Navigate to the `Builds` page and wait for the build to finish.
+
+2. Once the build completes, go to the `Domains` section in the side menu.
+
+3. Find your newly added domain in the domains list.
+
+4. Click the `Open` button next to your domain entry.
+
+5. The domain details will show you the DNS records you need to configure:
+   - **Wildcard Domain**: You'll see an entry like `*.example.com`
+   - **TXT Record**: A JWT token value that looks like:
+     ```
+     eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiNWRySEdLb0tYTUZ0QWVDYWdXOXY0Q1E4ajVNaFNmIn0.LeH7FynI9TE6UsNB7Wpd36Df-r7u4t2FkYh3S94EmqTrLcn6oC99fX5MKqRyeX9OW43zNmgv4cTf4gvVUS2qlQ
+     ```
+
+### Configuring Your Domain Provider
+
+To complete the custom domain setup, you need to add DNS records at your domain name provider. Here's how to configure them:
+
+#### Example: Configuring scaliny.com
+
+For a domain like `scaliny.com`, add the following DNS records:
+
+**1. CNAME Record:**
+- **Type**: `CNAME`
+- **Name/Host**: `substrate`
+- **Value/Target**: `tau.scaliny.com.`
+- **TTL**: Use default or 3600
+
+**2. TXT Record:**
+- **Type**: `TXT`
+- **Name/Host**: `qmapay2m`
+- **Value**: The JWT token value you copied from the domain details (the full token string)
+- **TTL**: Use default or 3600
+
+> **Note**: Make sure to include the trailing dot (`.`) after `tau.scaliny.com.` in the CNAME record value, as this indicates a fully qualified domain name.
+
+#### General Instructions
+
+For any custom domain, follow this pattern:
+
+1. **CNAME Record**:
+   - Name: `substrate`
+   - Value: `tau.<your-domain>.` (replace `<your-domain>` with your actual domain)
+
+2. **TXT Record**:
+   - Name: `qmapay2m`
+   - Value: The JWT token from the domain details page
+
+After adding these DNS records, DNS propagation may take a few minutes to several hours. Once propagation is complete, your website will be accessible via your custom domain instead of the generated `*.g.universe.localtau` domain.
+
+> **Note**: You can verify DNS propagation using tools like `dig` or online DNS checkers. Make sure both the CNAME and TXT records are properly configured before expecting your custom domain to work.
