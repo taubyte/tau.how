@@ -216,6 +216,7 @@ nav:
       - Production: platform/production.md
 
   - Tools:
+      - Tau CLI: tools/tau-cli.md
       - tools/dream.md
 
 # Extra CSS

@@ -30,6 +30,7 @@ Full‑stack workspace that lets teams and coding agents build, test, and ship a
 
 - [How Taubyte Works →](getting-started/introduction.md)
 - [Install Tools →](getting-started/installation.md)
+- [Tau CLI Guide →](tools/tau-cli.md)
 - [Run a Local Cloud →](getting-started/local-cloud.md)
 - [Your First Function →](getting-started/first-function.md)
 
