@@ -1,333 +1,348 @@
 # Tau CLI
 
-This page is a practical, end-to-end guide to using `tau` without interactive prompts and with production-safe defaults.
+This is a practical playbook for a real project: a SaaS notes app with:
+- API function: `GET /notes`
+- website: `app.notesforge.dev`
+- database + storage + messaging
+- shared library for common code
 
-If you want deep resource-specific behavior, use the Development pages as the canonical reference. This page focuses on command flow, command families, and high-signal usage patterns.
-
-## Install and verify
+## Before you start
 
 ```bash
 npm i -g @taubyte/cli
-tau --version
+tau version
 tau --help
 ```
 
-## Core mental model
+### Global flags (used everywhere)
 
-- A **project** has two repositories managed by Tau:
-  - config repository (`tb_config_<project>`)
-  - code repository (`tb_code_<project>`)
-- You usually work in this order:
-  1. authenticate
-  2. select cloud/universe + project
-  3. create or edit resources
-  4. push config
-  5. push code
-  6. check build/logs
+- `--yes`: skip confirmation prompts.
+- `--defaults`: auto-fill defaults when possible, fail if required values are missing.
+- `--json`: JSON output (great for scripts).
+- `--toon`: TOON output.
 
-## Authentication and profile management
+---
 
-### Create a profile
+## Journey 1: Ship `notesforge` to a remote cloud
+
+### Step 1 - Login
 
 ```bash
-tau login --new my_profile --set-default
+tau login notesforge_profile \
+  --new \
+  --provider github \
+  --token "$GITHUB_TOKEN" \
+  --set-default
 ```
 
-### Login with token non-interactively
+Flags used:
+- `--new`: create profile.
+- `--token`: avoid browser/login prompts.
+- `--set-default`: use this profile by default.
+
+### Step 2 - Select cloud and project context
 
 ```bash
-tau login --new my_profile --provider github --token "<TOKEN>" --set-default
-```
-
-### Switch profile
-
-```bash
-tau login my_profile
-tau whoami
-```
-
-## Context and selection
-
-### See current context
-
-```bash
+tau select cloud --fqdn cloud.notesforge.dev
+tau select project notesforge
 tau current
 ```
 
-### Select cloud (remote)
+Flags used:
+- `tau select cloud --fqdn`: target remote cloud.
+- `tau select project`: set active project.
+
+### Step 3 - Create project non-interactively
 
 ```bash
-tau select cloud --fqdn cloud.taubyte.com
-```
-
-### Select project
-
-```bash
-tau select project my_project
-tau current
-```
-
-## Project lifecycle
-
-### Create project (non-interactive)
-
-```bash
-tau new project my_project \
-  --description "Main product project" \
+tau --yes --defaults new project notesforge \
+  --description "NotesForge production project" \
   --private \
-  --no-embed-token \
-  --yes
+  --no-embed-token
 ```
 
-### Clone project repositories
+Flags used:
+- `--private` or `--public`: repo visibility.
+- `--no-embed-token`: avoid embedding token in remotes.
+
+### Step 4 - Clone project repos with explicit branch
 
 ```bash
-tau clone project my_project --branch main --no-embed-token --yes
+tau clone project notesforge --branch main --no-embed-token
 ```
 
-### Pull and push
+Flags used:
+- `--branch main`: pin branch.
+- `--no-embed-token`: safer remotes.
+
+### Step 5 - Create app resources
+
+Application:
 
 ```bash
-tau pull project
-tau push project --config-only --message "update config"
-tau push project --code-only --message "update code"
+tau --yes new application notes_app --description "Core app resources"
 ```
 
-## Resource command families
-
-Most resources follow this shape:
+HTTP function (`GET /notes`):
 
 ```bash
-tau new <resource> <name> [flags]
-tau edit <resource> <name> [flags]
-tau delete <resource> <name>
-tau list <resource_plural>
-```
-
-Use `tau --help` and `tau <command> --help` to view full flags in your installed version.
-
-## Create resources quickly (high-value templates)
-
-### Application
-
-```bash
-tau new application app_main --description "Main app" --yes
-```
-
-### HTTP function
-
-Important:
-- use one function per method+path
-- do not combine methods in one function
-
-```bash
-tau new function get_notes \
-  --description "List notes" \
+tau --yes new function get_notes \
+  --description "Return paginated notes for current user" \
   --type http \
   --method GET \
   --paths /notes \
-  --source app_main/functions/get_notes \
+  --source notes_app/functions/get_notes \
   --template empty \
   --language Go \
-  --timeout 30s \
-  --yes
+  --timeout 30s
 ```
 
-### Website
+Website (`app.notesforge.dev`):
 
 ```bash
-tau new website docs_site \
-  --description "Documentation website" \
+tau --yes new website notes_web \
+  --description "NotesForge frontend" \
   --template empty \
-  --domains docs.example.com \
+  --domains app.notesforge.dev \
   --paths / \
   --provider github \
   --generate-repository \
-  --no-private \
+  --private \
   --branch main \
-  --no-embed-token \
-  --yes
+  --no-embed-token
 ```
 
-### Database
+Database (matcher `notes`):
 
 ```bash
-tau new database notes_db \
-  --description "Notes data" \
+tau --yes new database notes_db \
+  --description "Primary notes KV store" \
   --match notes \
   --min 1 \
   --max 1 \
-  --size 1GB \
-  --yes
+  --size 5GB
 ```
 
-### Storage
+Storage (matcher `attachments`):
 
 ```bash
-tau new storage uploads_store \
-  --description "User uploads" \
-  --match uploads \
+tau --yes new storage notes_attachments \
+  --description "Attachment object storage" \
+  --match attachments \
   --bucket Object \
-  --size 10GB \
-  --versioning \
-  --yes
+  --size 50GB \
+  --versioning
 ```
 
-### Messaging
+Messaging (channel matcher `notes.events`):
 
 ```bash
-tau new messaging events_channel \
-  --description "App event bus" \
-  --match events \
+tau --yes new messaging notes_events \
+  --description "Events for note created/updated/deleted" \
+  --match notes.events \
   --mqtt \
-  --web-socket \
-  --yes
+  --web-socket
 ```
 
-### Domain
+Domain:
 
 ```bash
-tau new domain app_domain \
-  --description "Public app domain" \
-  --fqdn app.example.com \
-  --cert-type le \
-  --yes
+tau --yes new domain notes_domain \
+  --description "Primary app domain" \
+  --fqdn app.notesforge.dev \
+  --cert-type auto
 ```
 
-### Library
+Library:
 
 ```bash
-tau new library shared_sdk \
-  --description "Shared app code" \
+tau --yes new library notes_shared \
+  --description "Shared models and validation helpers" \
   --template empty \
   --provider github \
   --generate-repository \
   --private \
   --branch main \
-  --no-embed-token \
-  --yes
+  --no-embed-token
 ```
 
-## Production-safe workflow
-
-Use this exact sequence after resource changes:
-
-1. Push config first:
+### Step 6 - Push safely (config first, code second)
 
 ```bash
-tau push project --config-only --message "resource config updates"
+tau push project notesforge --config-only --message "notesforge resources and routes"
+tau push project notesforge --code-only --message "notes API + web app changes"
 ```
 
-2. Then push code:
-
-```bash
-tau push project --code-only --message "function and website code updates"
-```
-
-3. Verify builds:
+### Step 7 - Check builds and logs
 
 ```bash
 tau query builds --since 24h
 tau query logs --jid "<JOB_ID>"
 ```
 
-## Dream/local workflow
+---
 
-`dream` is the local cloud runtime. Use it with `tau` to test full workflows before remote deployment.
+## Journey 2: Fast local loop for `get_notes`
 
-### 1) Install and start
+This is your fast inner loop while developing a function/site/library.
+
+### Build artifacts with `tau build`
+
+Function:
+
+```bash
+tau build function --name get_notes --output ./dist/get_notes.wasm
+```
+
+Website:
+
+```bash
+tau build website --name notes_web --output ./dist/notes_web.zip
+```
+
+Library:
+
+```bash
+tau build library --name notes_shared --output ./dist/notes_shared.wasm
+```
+
+Flags that matter:
+- `--name` (`-n`): resource name to build.
+- `--output` (`-o`): exact output path, so scripts can pick artifacts reliably.
+
+### Run functions with `tau run`
+
+Basic run:
+
+```bash
+tau run function --name get_notes
+```
+
+Run with realistic request overrides:
+
+```bash
+tau run function --name get_notes \
+  --force-build \
+  --method GET \
+  --path "/notes?limit=25&cursor=abc123" \
+  --domain api.notesforge.dev \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  --header "X-Workspace-Id: ws_demo_001" \
+  --header "X-Trace-Id: local-debug-2026-03-23" \
+  --body "" \
+  --timeout 30s
+```
+
+Run a pinned wasm artifact:
+
+```bash
+tau run function --name get_notes --wasm ./dist/get_notes.wasm
+```
+
+Flags that matter:
+- `--force-build`: rebuild before run.
+- `--method`, `--path`, `--domain`: override endpoint details.
+- `--header`: repeatable request headers.
+- `--body`: request payload (literal string or `@file`).
+- `--wasm`: run a specific compiled binary.
+
+---
+
+## Journey 3: Switch the same project to local Dream
 
 ```bash
 npm i -g @taubyte/dream
 dream status
 dream start
-```
-
-### 2) Create/select universe
-
-```bash
 dream status universe default
 dream new universe default
-dream select universe default
-```
-
-### 3) Point Tau to local context
-
-```bash
 tau select cloud --universe default
+tau select project notesforge
 tau current
 ```
 
-### 4) Work normally
+From this point, you use the same `tau new`, `tau build`, `tau run`, `tau push`, `tau query` flow.
 
-Use the same `tau new`, `tau edit`, `tau push`, `tau query` flow you use remotely.
+For Dream details, see [Dream CLI](dream.md).
 
-## Non-interactive patterns you should always use
+---
 
-- Prefer explicit boolean flags:
-  - `--no-embed-token` instead of interactive prompts
-  - `--private` or `--no-private` explicitly for repo visibility
-- Always pass `--yes` when scripting resource creation.
-- Always pass `--branch main` on clone operations.
-- Avoid prompt-only flows in CI.
+## Flag cheat sheets by command family
 
-## Windows notes
+### `tau new`
 
-- For some path-based flags in Git Bash/MSYS, disable path conversion:
+Main resources:
+- `project`, `application`, `function`, `website`, `database`, `storage`, `messaging`, `library`, `domain`.
 
-```bash
-MSYS_NO_PATHCONV=1 tau new function ...
-```
+Patterns:
+- Always start scripts with `tau --yes --defaults new ...`.
+- Use explicit booleans (`--private` / `--no-private`, `--embed-token` / `--no-embed-token`).
+- For HTTP functions, create one function per `(method + path)` pair.
 
-- Keep command examples in shell-compatible quoting.
-
-## Troubleshooting
-
-### `project is not selected` or wrong context
+Practical split for the same route family:
 
 ```bash
-tau current
-tau select project my_project
-tau current
+tau --yes new function get_notes    --type http --method GET    --paths /notes --source notes_app/functions/get_notes    --template empty --language Go
+tau --yes new function create_note  --type http --method POST   --paths /notes --source notes_app/functions/create_note  --template empty --language Go
+tau --yes new function delete_note  --type http --method DELETE --paths /notes --source notes_app/functions/delete_note  --template empty --language Go
 ```
 
-### Build fails after push
+### `tau clone`
+
+Main resources:
+- `project`, `website`, `library`.
+
+High-value flags:
+- `--branch main`
+- `--no-embed-token`
+
+### `tau push` / `tau pull`
+
+For project:
+- `--config-only`
+- `--code-only`
+- `--message` (push)
+
+Recommended order:
+1. `pull` if needed.
+2. `push --config-only`
+3. `push --code-only`
+
+### `tau query`
+
+High-value commands:
+- `tau query builds --since 24h`
+- `tau query logs --jid "<JOB_ID>"`
+
+Machine-friendly output for CI checks:
 
 ```bash
-tau query builds --since 24h
-tau query logs --jid "<JOB_ID>"
+tau --json query builds --since 2h
+tau --json query logs --jid "$FAILED_JOB_ID" --output ./logs
 ```
 
-Check for:
-- invalid function method/path setup
-- wrong source path
-- missing `.taubyte` metadata in function/website folders
-- compile/runtime errors in function code
-
-### Dream/local commands fail
+### `tau validate`
 
 ```bash
-dream status
-dream start
-dream status universe default
+tau validate config
 ```
 
-If Docker is not running, start Docker Desktop first, then retry.
+Use before push when you changed project config.
 
-## Full potential checklist
+---
 
-- Keep one project per product boundary.
-- Group resources by application.
-- Keep one HTTP function per method+path.
-- Reuse code through libraries.
-- Use matcher values consistently for data resources.
-- Push config before code when infra changes.
-- Use local Dream for integration testing.
-- Monitor every deployment with `tau query builds` and `tau query logs`.
+## Non-interactive rules that save you pain
 
-## Command discovery map
+- Start automated commands with `tau --yes --defaults`.
+- Pass all required flags directly; do not rely on interactive prompts.
+- Use one HTTP function per `(method + path)` pair.
+- Use `--branch main` when cloning.
+- Push config before code after infra/resource edits.
+- Keep matchers stable (`notes`, `attachments`, `notes.events`) so code and config stay aligned.
 
-Use these help pages directly in your terminal:
+---
+
+## Command discovery
 
 ```bash
 tau --help
@@ -335,12 +350,12 @@ tau new --help
 tau edit --help
 tau delete --help
 tau list --help
+tau select --help
 tau clone --help
 tau pull --help
 tau push --help
 tau query --help
-tau select --help
-tau current --help
+tau build --help
+tau run --help
+tau validate --help
 ```
-
-For complete local cloud operations, see [Dream CLI](dream.md).
